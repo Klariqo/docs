@@ -20,9 +20,12 @@
   "navigation": {
     "pages": [
       {
-        "group": "Get started",
+        "group": "Start here",
         "pages": [
-          "index"
+          "index",
+          "start-here/how-klariqo-works",
+          "start-here/trust-and-honesty",
+          "start-here/glossary"
         ]
       },
       {
@@ -50,6 +53,12 @@
         "pages": [
           "dialer-integrations/overview",
           "dialer-integrations/connect-vicidial"
+        ]
+      },
+      {
+        "group": "CRM integrations",
+        "pages": [
+          "crm-integrations/overview"
         ]
       },
       {

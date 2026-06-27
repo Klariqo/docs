@@ -1,0 +1,52 @@
+---
+title: "Glossary"
+description: "Key Klariqo terms: vCon, compliance record, content hash, signature, verifier, third-party witness, scorecard, and more."
+---
+
+## vCon
+
+A vCon is an IETF-track conversation-record format for parties, dialog, and analysis. Klariqo issues signed vCons as compliance records, but Klariqo does not own the vCon standard.
+
+## Compliance record / evidence record
+
+A compliance record, also called an evidence record, is a signed vCon Klariqo issues for a call covered by an active scorecard. It carries the call record, analysis, and signature together.
+
+## Content hash
+
+A content hash is a SHA-512 fingerprint of the recording. It helps tie the record to the recording content.
+
+## JWS signature
+
+A JWS signature is the signature Klariqo applies to a vCon using RS256. It carries Klariqo's signing certificate and makes later changes detectable.
+
+## Self-asserted
+
+Self-asserted means Klariqo publishes its own signing key. Klariqo is not a certificate authority, so the signature proves the record was signed by Klariqo's key and was not altered after signing.
+
+## Public verifier
+
+The public verifier is the in-browser tool at `klariqo.com/vcon` that checks a vCon. It reports whether the signature is valid, whether the record was altered, and whether it was signed by Klariqo's published key.
+
+## Third-party witness
+
+A third-party witness is the independent witness that records the record's fingerprint plus minimal audit identifiers. JLINC does not receive the transcript, audio, phone numbers, or QA content.
+
+## Scorecard
+
+A scorecard is the customer-configured operating rule set used to review calls. It contains required elements and prohibited claims, each with critical and enabled flags.
+
+## QA result
+
+A QA result is the review outcome for a call, with status values of `pass`, `needs_review`, `fail`, `not_applicable`, or `error`. It also includes `overall_score` when scored and `compliance_status` as `pass`, `fail`, or `not_evaluated`.
+
+## Standard Webhooks
+
+Standard Webhooks is the signing scheme Klariqo uses for compliance export deliveries. Each delivery includes `webhook-id`, `webhook-timestamp`, and `webhook-signature`, with signed content built from `id.timestamp.body`.
+
+## VICIdial
+
+VICIdial is the existing dialer Klariqo can connect to as a remote SIP agent. Klariqo sits on top of the dialer you already run, it does not replace it.
+
+## Honesty boundary
+
+These terms describe evidence, provenance, and audit-readiness. They do not mean Klariqo makes you compliant, proves consent by itself, wins a lawsuit, or replaces your scripts, retention policy, or counsel review.
