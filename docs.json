@@ -52,7 +52,8 @@
         "group": "Dialer integrations",
         "pages": [
           "dialer-integrations/overview",
-          "dialer-integrations/connect-vicidial"
+          "dialer-integrations/connect-vicidial",
+          "dialer-integrations/twilio"
         ]
       },
       {

@@ -1,0 +1,22 @@
+---
+title: "Twilio (bring your own)"
+description: "Use your own Twilio number with Klariqo's voice AI by pointing it at a Klariqo endpoint."
+---
+
+If you already use Twilio, you can run Klariqo's voice AI on your own Twilio number. You keep your Twilio account and your number, and Klariqo handles the call.
+
+This suits inbound lines and simpler setups. For VICIdial outbound at scale, the [VICIdial integration](/dialer-integrations/connect-vicidial) is the primary path.
+
+## How it works
+
+- You point your Twilio number's voice webhook at the Klariqo endpoint you are given.
+- Klariqo answers the call with your configured AI agent.
+- The call is recorded, reviewed against your scorecard, and turned into a signed compliance record, the same as any other Klariqo call.
+
+## Set it up
+
+Twilio bring-your-own is enabled with Klariqo rather than fully self-serve, because Klariqo registers your number on its side. Contact Klariqo to turn it on. You provide your Twilio number, and Klariqo gives you the exact endpoint to set as that number's voice webhook.
+
+<Warning>
+  As with any Klariqo call, the record is evidence and provenance, not legal compliance. You remain responsible for your scripts, consent practices, retention, and counsel review.
+</Warning>
