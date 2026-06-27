@@ -1,0 +1,56 @@
+---
+title: "Connect VICIdial"
+description: "Connect Klariqo to your existing VICIdial as a remote SIP agent. A short, customer-side setup."
+---
+
+Klariqo connects to your VICIdial as a remote SIP agent. It does not replace your dialer. The setup is the same as adding a new remote SIP phone and agent, and your VICIdial administrator does it.
+
+## Before you start
+
+You need administrator access to your VICIdial. From your Klariqo dashboard you get two things: the Klariqo IP to whitelist, and the registration password for the SIP extension. Use the password exactly as provided. Do not change it or add special characters, because VICIdial silently rejects some of them.
+
+## Setup
+
+<Steps>
+  <Step title="Create a phone extension">
+    In Admin > Phones > Add a New Phone, create an extension with protocol SIP, voicemail off, and active. Use the extension name Klariqo gives you (for example, klariqo-ai) and the registration password from your dashboard. Note the dial plan number you assign.
+  </Step>
+  <Step title="Whitelist the Klariqo IP">
+    Klariqo needs network access to your VICIdial server. Whitelist the Klariqo IP shown in your dashboard on your server's firewall. If your server runs at a cloud provider, open the same IP on the cloud firewall too. The cloud firewall sits above the server's own firewall and is the single most common reason a setup stalls.
+  </Step>
+  <Step title="Reload SIP">
+    Reload your Asterisk SIP configuration so the new extension is active. Klariqo registers automatically, usually within about a minute.
+  </Step>
+  <Step title="Create a remote agent">
+    In Admin > Remote Agents > Add a New Remote Agent, set the external extension to the dial plan number from the first step, and assign it to the campaign Klariqo should handle. If you later add a second agent for another campaign, give it a User ID range that does not overlap the first. VICIdial reserves a block of consecutive User IDs per agent, and an overlap makes registration fail silently after a couple of minutes.
+  </Step>
+  <Step title="Set up transfer routing">
+    If Klariqo transfers qualified calls to a human closer, add a transfer destination in Admin > Carriers. This is done entirely in the VICIdial UI, with no shell access, and VICIdial reloads the dialplan for you.
+  </Step>
+</Steps>
+
+## What to share with Klariqo
+
+After setup, send Klariqo the details it needs to finish the connection on its side. Every value below is an example.
+
+| Item | Example |
+| --- | --- |
+| Phone extension name | klariqo-ai |
+| Dial plan number | 8400 |
+| VICIdial server IP and SIP port | 203.0.113.10, port 5060 |
+| VICIdial API user and password | your-api-user, your-api-password |
+| Remote agent user and User ID range | klariqo, 1001 to 1010 |
+| Transfer trunk name and extension | your-trunk, 9999 |
+
+Then confirm that the Klariqo IP is whitelisted.
+
+## Common stalls
+
+- The cloud-provider firewall is closed even though the server firewall is open. This is the most common one.
+- The registration password was modified. Use it exactly as provided.
+- A non-standard SIP port was not communicated. If Asterisk listens on a port other than 5060, tell Klariqo.
+- The SIP configuration was not reloaded after the extension was created.
+
+## Security
+
+Klariqo registers with SIP digest authentication. Call audio to the Klariqo pipeline travels over an encrypted WebSocket, and recordings are stored in encrypted storage.

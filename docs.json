@@ -44,6 +44,13 @@
           "call-qa/scorecards",
           "call-qa/qa-results"
         ]
+      },
+      {
+        "group": "Dialer integrations",
+        "pages": [
+          "dialer-integrations/overview",
+          "dialer-integrations/connect-vicidial"
+        ]
       }
     ],
     "global": {
