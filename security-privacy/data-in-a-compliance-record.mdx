@@ -1,0 +1,89 @@
+---
+title: "Data in a compliance record"
+description: "What a Klariqo compliance record may contain, and what the third-party witness never receives."
+---
+
+A Klariqo compliance record is a signed vCon issued for a call covered by an active scorecard. It brings the call record, analysis, fingerprint, and signature into one verifiable container.
+
+This page describes the data shape at a high level. Examples are synthetic only.
+
+## What the record may contain
+
+<Steps>
+  <Step title="Parties">
+    The participants in the conversation. A vCon uses parties to describe who or what took part in the call.
+  </Step>
+  <Step title="Transcript">
+    The text transcript of the conversation.
+  </Step>
+  <Step title="Recording reference">
+    A reference to the call recording.
+  </Step>
+  <Step title="Content hash">
+    A SHA-512 content hash that fingerprints the recording.
+  </Step>
+  <Step title="QA result">
+    The quality and compliance review attached to the record. QA results can include statuses such as pass, needs_review, fail, not_applicable, or error.
+  </Step>
+  <Step title="Sentiment">
+    Sentiment analysis attached as part of the record analysis.
+  </Step>
+  <Step title="Signature">
+    A JWS signature using RS256, carrying Klariqo's signing certificate, so later changes are detectable.
+  </Step>
+</Steps>
+
+## Synthetic record shape
+
+This example is synthetic. It is not a real call, transcript, customer record, or phone number.
+
+```json
+{
+  "parties": [
+    { "role": "synthetic_caller" },
+    { "role": "synthetic_agent" }
+  ],
+  "dialog": {
+    "transcript": "Synthetic transcript text.",
+    "recording_reference": "synthetic-recording-reference",
+    "content_hash": "sha512-synthetic-content-hash"
+  },
+  "analysis": {
+    "qa": {
+      "status": "needs_review",
+      "overall_score": 82,
+      "compliance_status": "pass"
+    },
+    "sentiment": {
+      "label": "synthetic-sentiment"
+    }
+  },
+  "signature": {
+    "type": "JWS",
+    "alg": "RS256"
+  }
+}
+```
+
+## What the witness receives
+
+The third-party witness records the record's fingerprint plus minimal audit identifiers. It does not receive the transcript, audio, phone numbers, or QA content.
+
+That distinction matters. Witnessing helps show that a specific signed record existed, without sending the call content to the witness.
+
+<CardGroup cols={2}>
+  <Card title="Third-party witnessing" icon="user-shield" href="/compliance-records/third-party-witnessing">
+    See what the independent witness records, and what it never receives.
+  </Card>
+  <Card title="Verify a vCon" icon="circle-check" href="/compliance-records/verify-a-vcon">
+    Check whether a signed record is valid or has been altered.
+  </Card>
+</CardGroup>
+
+## What you control
+
+You control what is said on calls through your scripts, agent practices, and operating rules. You also control how long you retain records in your own systems and who you allow to access them.
+
+<Warning>
+  A compliance record supports evidence, provenance, and audit-readiness. It does not make you compliant, prove consent by itself, approve your scripts, or replace your retention policy and counsel review.
+</Warning>

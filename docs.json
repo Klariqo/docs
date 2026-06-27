@@ -71,6 +71,13 @@
           "compliance-export-webhooks/record-envelope",
           "compliance-export-webhooks/fetch-the-signed-vcon"
         ]
+      },
+      {
+        "group": "Security and privacy",
+        "pages": [
+          "security-privacy/overview",
+          "security-privacy/data-in-a-compliance-record"
+        ]
       }
     ],
     "global": {

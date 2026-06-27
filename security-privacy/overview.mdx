@@ -1,0 +1,62 @@
+---
+title: "Security overview"
+description: "How Klariqo protects compliance records, and what remains your responsibility."
+---
+
+Security is shared. Klariqo protects the compliance record system and the evidence chain. You control the dialer environment, call scripts, access decisions, consent practices, and retention policy around your own operations.
+
+This page explains that split.
+
+## What Klariqo does
+
+<Steps>
+  <Step title="Signs compliance records">
+    Klariqo signs records for calls covered by an active scorecard. The record is signed with a JWS signature using RS256, and the signature carries Klariqo's signing certificate.
+  </Step>
+  <Step title="Makes changes detectable">
+    A signed record is tamper-evident. If the signed vCon is changed after signing, verification fails.
+  </Step>
+  <Step title="Fingerprints the recording">
+    A SHA-512 content hash fingerprints the recording inside the record. This helps tie the record to the recording content.
+  </Step>
+  <Step title="Secures dialer connections">
+    Klariqo uses SIP digest authentication for dialer connections. Audio travels over an encrypted WebSocket.
+  </Step>
+  <Step title="Stores recordings encrypted">
+    Recordings are kept in encrypted storage.
+  </Step>
+  <Step title="Uses third-party witnessing">
+    An independent witness records the record's fingerprint plus minimal audit identifiers. The witness does not receive the transcript, audio, phone numbers, or QA content.
+  </Step>
+</Steps>
+
+## What you own
+
+You are responsible for the systems and decisions you control.
+
+| Area | Your responsibility |
+| --- | --- |
+| Dialer security | Secure the dialer you already run, including your own users, settings, network access, and operational controls. |
+| Scripts and consent | Decide what your agents say, how consent is collected, and how your scripts are reviewed. |
+| Access | Decide who in your organization can access records, recordings, QA results, and exports. |
+| Retention | Decide how long you keep records and how your retention policy is reviewed. |
+| Counsel review | Review your program with your own counsel before relying on any evidence workflow. |
+
+## Shared responsibility in practice
+
+<CardGroup cols={2}>
+  <Card title="Klariqo evidence layer" icon="shield-check" href="/compliance-records/evidence-chain">
+    Signed records, content hashes, QA results, witnessing, and verification.
+  </Card>
+  <Card title="Your operating layer" icon="users" href="/compliance-records/evidence-boundary">
+    Scripts, consent, dialer administration, access control, retention, and legal review.
+  </Card>
+</CardGroup>
+
+## What security does not mean
+
+Security controls help protect the record and its provenance. They do not decide whether a call was legally placed, whether a script is approved, or whether your retention policy is correct.
+
+<Warning>
+  Klariqo provides evidence, provenance, and audit-readiness. Klariqo does not make you compliant, prove consent by itself, win a lawsuit, or replace your scripts, retention policy, access decisions, dialer security, or counsel review.
+</Warning>
