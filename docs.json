@@ -8,6 +8,15 @@
     "dark": "#84cc00"
   },
   "favicon": "/favicon.svg",
+  "seo": {
+    "metatags": {
+      "og:type": "website",
+      "og:site_name": "Klariqo",
+      "twitter:card": "summary_large_image",
+      "robots": "index, follow"
+    },
+    "indexing": "all"
+  },
   "navigation": {
     "pages": [
       {
@@ -26,6 +35,14 @@
           "compliance-records/verify-a-vcon",
           "compliance-records/third-party-witnessing",
           "compliance-records/evidence-boundary"
+        ]
+      },
+      {
+        "group": "Call QA",
+        "pages": [
+          "call-qa/overview",
+          "call-qa/scorecards",
+          "call-qa/qa-results"
         ]
       }
     ],

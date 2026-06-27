@@ -1,0 +1,70 @@
+---
+title: "QA results"
+description: "How to read a Klariqo QA status, overall score, and compliance status."
+---
+
+A QA result is the review outcome for a call covered by an active scorecard. It tells you the call status, the overall score when the call can be scored, and the compliance status attached to the signed record.
+
+## Result status
+
+A QA result can use these status values:
+
+| Status | Meaning |
+| --- | --- |
+| `pass` | The call passed the scorecard review. |
+| `needs_review` | The call needs review. |
+| `fail` | The call failed the scorecard review. |
+| `not_applicable` | The call could not be graded, such as voicemail or no engagement. |
+| `error` | A transient judge failure occurred, and the review is auto-retried. |
+
+## Scores
+
+`overall_score` is a number from 0 to 100 when the call is scored.
+
+`null` means unscored. It is not a zero. Unscored results are excluded from averages.
+
+<Warning>
+  Do not treat a null score as a failed score or a perfect score. It means the call did not receive a numeric score.
+</Warning>
+
+## Compliance status
+
+The compliance status is separate from the result status. It can be:
+
+| Compliance status | Meaning |
+| --- | --- |
+| `pass` | The compliance review passed. |
+| `fail` | The compliance review failed. |
+| `not_evaluated` | The call was unscored. |
+
+`not_evaluated` is used when a result is unscored.
+
+## Not applicable and error
+
+<Steps>
+  <Step title="Not applicable">
+    `not_applicable` means the call could not be graded. This happens for voicemail, or when there is no engagement, defined as fewer than two caller turns. The judge is not called at all.
+  </Step>
+  <Step title="Error">
+    `error` means a transient judge failure occurred. The review is auto-retried.
+  </Step>
+</Steps>
+
+## What 100% QA means
+
+"100% QA" means every in-scope call is reviewed. It does not mean every call receives a numeric score.
+
+Some calls are reviewed and then marked `not_applicable`. Some may temporarily show `error` while the review is retried. Those cases are not the same as a scored call with a zero.
+
+<CardGroup cols={2}>
+  <Card title="Scorecards" icon="list-check" href="/call-qa/scorecards">
+    See the operating rules each call is reviewed against.
+  </Card>
+  <Card title="Verify a vCon" icon="circle-check" href="/compliance-records/verify-a-vcon">
+    Check the signed record that carries the QA result.
+  </Card>
+</CardGroup>
+
+<Warning>
+  QA results are evidence and provenance, not a legal judgment. They show how a call matched your configured scorecard. They do not make you compliant, prove consent, or replace review by your own counsel.
+</Warning>

@@ -1,0 +1,78 @@
+---
+title: "Scorecards"
+description: "How Klariqo reviews calls against your own required elements and prohibited claims."
+---
+
+A scorecard is the operating rule set Klariqo uses to review your calls. You define what should happen on a call, what must not be said, which checks are critical, and which checks are enabled.
+
+Scorecards apply to Klariqo AI calls and to human-agent calls on your VICIdial dialer.
+
+## What a scorecard contains
+
+<Steps>
+  <Step title="Required elements">
+    Required elements are the things an agent should do on the call. Each required element has a key, a label, a critical flag, and an enabled flag.
+  </Step>
+  <Step title="Prohibited claims">
+    Prohibited claims are the things an agent must not say. Each prohibited claim has a key, a label, a critical flag, and an enabled flag.
+  </Step>
+  <Step title="Critical checks">
+    A critical check marks a serious failure if that check fails.
+  </Step>
+  <Step title="Enabled checks">
+    Disabled checks are turned off and excluded from results.
+  </Step>
+</Steps>
+
+## Required elements
+
+Required elements define what the call should include. They are stored as:
+
+```json
+[
+  {
+    "key": "synthetic_required_element",
+    "label": "Synthetic required element",
+    "critical": true,
+    "enabled": true
+  }
+]
+```
+
+This example is synthetic. Your scorecard should reflect your own scripts, disclosures, and operating rules.
+
+## Prohibited claims
+
+Prohibited claims define what the call should not include. They are stored as:
+
+```json
+[
+  {
+    "key": "synthetic_prohibited_claim",
+    "label": "Synthetic prohibited claim",
+    "critical": true,
+    "enabled": true
+  }
+]
+```
+
+This example is synthetic. It is only here to show the field shape.
+
+## How scoring uses a scorecard
+
+Klariqo reviews enabled required elements and enabled prohibited claims. Each category carries a score, and those category scores roll up into the overall score for the call.
+
+Disabled checks are excluded from results. They do not affect the category score or the overall score.
+
+<CardGroup cols={2}>
+  <Card title="QA results" icon="clipboard-check" href="/call-qa/qa-results">
+    Learn how to read a status, score, and compliance status.
+  </Card>
+  <Card title="The evidence chain" icon="link" href="/compliance-records/evidence-chain">
+    See how QA joins the signed compliance record.
+  </Card>
+</CardGroup>
+
+<Warning>
+  Scorecards are customer-configured operating rules, not Klariqo legal templates. QA shows whether a call matched your rules. It does not make you compliant, prove consent, or replace review by your own counsel.
+</Warning>
