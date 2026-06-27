@@ -22,8 +22,10 @@
           "compliance-records/overview",
           "compliance-records/evidence-chain",
           "compliance-records/what-is-a-vcon",
+          "compliance-records/signed-vcons",
           "compliance-records/verify-a-vcon",
-          "compliance-records/third-party-witnessing"
+          "compliance-records/third-party-witnessing",
+          "compliance-records/evidence-boundary"
         ]
       }
     ],
