@@ -1,0 +1,46 @@
+---
+title: "Compliance export webhooks"
+description: "Push every finalized compliance record to your own system, signed, the moment it is ready."
+---
+
+When a compliance record is final, Klariqo can push it to your system with a signed webhook. You receive a pointer to the signed record and fetch the record itself from a short-lived link. This lets you keep your own copy of every record, in your own systems, automatically.
+
+## How it works
+
+<Steps>
+  <Step title="Add an endpoint">
+    In your dashboard, give Klariqo an HTTPS URL to deliver to. You get a signing secret for that endpoint.
+  </Step>
+  <Step title="Verify the endpoint">
+    Klariqo sends a verification challenge, and your endpoint echoes it back. An endpoint can only receive real records after it is verified.
+  </Step>
+  <Step title="Receive records">
+    When a record is final, Klariqo sends a signed `compliance_record.ready` event to your endpoint.
+  </Step>
+  <Step title="Verify and fetch">
+    Verify the signature, then fetch the signed vCon from the link in the event.
+  </Step>
+</Steps>
+
+## What the delivery looks like
+
+The webhook carries a pointer, not the full record inline: an envelope with the call metadata and an expiring download URL for the signed vCon. Every delivery is signed using the Standard Webhooks scheme, so you can confirm it came from Klariqo before you trust it. Delivery is forward-only from the moment you enable an endpoint, at least once, with no ordering guarantee, so dedupe by the event id.
+
+<CardGroup cols={2}>
+  <Card title="Set up an endpoint" icon="link" href="/compliance-export-webhooks/set-up-an-endpoint">
+    Add a URL, get your secret, and pass the verification handshake.
+  </Card>
+  <Card title="Verify signatures" icon="shield-check" href="/compliance-export-webhooks/verify-signatures">
+    Confirm a delivery genuinely came from Klariqo.
+  </Card>
+  <Card title="Record envelope" icon="box" href="/compliance-export-webhooks/record-envelope">
+    The shape of the delivered event.
+  </Card>
+  <Card title="Fetch the signed vCon" icon="file-arrow-down" href="/compliance-export-webhooks/fetch-the-signed-vcon">
+    Retrieve and verify the record itself.
+  </Card>
+</CardGroup>
+
+<Warning>
+  Exporting records gives you your own copy of the evidence. It does not change your compliance obligations. You remain responsible for how you store, retain, and act on the records you receive.
+</Warning>

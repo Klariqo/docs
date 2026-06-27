@@ -1,0 +1,91 @@
+---
+title: "Compliance record envelope"
+description: "The pointer payload Klariqo sends when a signed compliance record is ready."
+---
+
+A compliance export webhook sends a pointer to a signed compliance record. It does not send the full signed vCon inline.
+
+The event type is `compliance_record.ready`. It means a finalized signed compliance record is ready to fetch.
+
+## What the envelope contains
+
+<Steps>
+  <Step title="Event type">
+    The event type is `compliance_record.ready`.
+  </Step>
+  <Step title="Call metadata">
+    The envelope includes call metadata so your system can route and store the export.
+  </Step>
+  <Step title="Record pointer">
+    The envelope includes an expiring download URL for the signed vCon.
+  </Step>
+  <Step title="Content-bound fetch">
+    The download URL is bound to the record content hash.
+  </Step>
+</Steps>
+
+## Synthetic example
+
+This example is synthetic. It shows the public shape of a pointer export, not a real call or customer record.
+
+```json
+{
+  "type": "compliance_record.ready",
+  "call": {
+    "id": "synthetic-call-123",
+    "started_at": "2026-06-27T12:00:00Z"
+  },
+  "record": {
+    "format": "vcon",
+    "content_hash": "sha512-synthetic-content-hash",
+    "download_url": "https://example.com/synthetic-expiring-vcon-download"
+  }
+}
+```
+
+The `download_url` is short-lived. Fetch the signed vCon after you verify the webhook signature, then store the record according to your own retention policy.
+
+<Warning>
+  Do not treat the webhook body as the signed compliance record. The signed vCon is fetched from the record download URL.
+</Warning>
+
+## Delivery behavior
+
+Compliance record exports are forward-only from endpoint enablement. Klariqo does not promise historical backfill for records created before the endpoint was enabled.
+
+Deliveries are at least once. Your endpoint may receive the same delivery more than once, so dedupe by the delivery id.
+
+Klariqo does not guarantee ordering between deliveries.
+
+## How to handle an event
+
+<Steps>
+  <Step title="Verify the signature">
+    Verify the Standard Webhooks signature against the raw request body.
+  </Step>
+  <Step title="Dedupe the delivery">
+    Check whether you have already processed the delivery id.
+  </Step>
+  <Step title="Read the envelope">
+    Confirm the event type is `compliance_record.ready`.
+  </Step>
+  <Step title="Fetch the signed vCon">
+    Use the expiring download URL to fetch the signed compliance record.
+  </Step>
+  <Step title="Store your copy">
+    Store the signed vCon in your own system according to your retention and access rules.
+  </Step>
+</Steps>
+
+<CardGroup cols={2}>
+  <Card title="Verify signatures" icon="shield-check" href="/compliance-export-webhooks/verify-signatures">
+    Verify a webhook before processing the envelope.
+  </Card>
+  <Card title="Fetch the signed vCon" icon="file-arrow-down" href="/compliance-export-webhooks/fetch-the-signed-vcon">
+    Retrieve the signed record from the pointer.
+  </Card>
+</CardGroup>
+
+<Warning>
+  Exported records support evidence, provenance, and audit-readiness. They do not make you compliant, prove consent by themselves, or replace your retention policy and counsel review.
+</Warning>

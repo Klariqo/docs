@@ -1,0 +1,34 @@
+---
+title: "Fetch the signed vCon"
+description: "Retrieve the signed compliance record from the link in a webhook, then verify it."
+---
+
+A webhook delivers a pointer, not the record itself. To get the record, fetch it from the download URL in the event. The URL is short-lived and tied to that one record.
+
+## Fetch and verify
+
+<Steps>
+  <Step title="Read the download URL">
+    Take the download URL from the event envelope you received.
+  </Step>
+  <Step title="Fetch it before it expires">
+    Fetch the URL promptly. It returns the signed vCon, the full compliance record.
+  </Step>
+  <Step title="Verify it">
+    Check the signature, the same way the public verifier does, and confirm the recording's SHA-512 content hash in the record. See [verify a vCon](/compliance-records/verify-a-vcon).
+  </Step>
+</Steps>
+
+## Notes
+
+- The URL is short-lived. Fetch it promptly and store the record you retrieved, not the URL.
+- The URL is bound to one record. It will not return any other record.
+
+<CardGroup cols={2}>
+  <Card title="Verify a vCon" icon="circle-check" href="/compliance-records/verify-a-vcon">
+    How to check a signed record's integrity.
+  </Card>
+  <Card title="Verify signatures" icon="shield-check" href="/compliance-export-webhooks/verify-signatures">
+    Confirm the webhook delivery itself.
+  </Card>
+</CardGroup>

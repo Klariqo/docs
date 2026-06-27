@@ -51,6 +51,16 @@
           "dialer-integrations/overview",
           "dialer-integrations/connect-vicidial"
         ]
+      },
+      {
+        "group": "Compliance export webhooks",
+        "pages": [
+          "compliance-export-webhooks/overview",
+          "compliance-export-webhooks/set-up-an-endpoint",
+          "compliance-export-webhooks/verify-signatures",
+          "compliance-export-webhooks/record-envelope",
+          "compliance-export-webhooks/fetch-the-signed-vcon"
+        ]
       }
     ],
     "global": {

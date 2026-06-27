@@ -1,0 +1,39 @@
+---
+title: "Set up an endpoint"
+description: "Add a webhook endpoint, get your signing secret, and pass the verification handshake."
+---
+
+An endpoint is the HTTPS URL where Klariqo delivers signed records. You add it in your dashboard, prove you control it, then enable it.
+
+## Add the endpoint
+
+<Steps>
+  <Step title="Add your URL">
+    In your dashboard, under Compliance export, add an HTTPS URL. Klariqo generates a signing secret for that endpoint. Copy the secret now, it is shown only once.
+  </Step>
+  <Step title="Verify the endpoint">
+    Klariqo sends a verification request carrying a challenge. Your endpoint must echo the challenge back, either in the response body or in a response header. This proves you control the URL.
+  </Step>
+  <Step title="Enable it">
+    Once the endpoint is verified, enable it. From that point, newly finalized records are delivered to it.
+  </Step>
+</Steps>
+
+## Requirements
+
+- HTTPS only, on a public URL that Klariqo can reach.
+- Respond with a 2xx quickly. Acknowledge first, then do any heavy processing.
+- Keep the signing secret safe. You need it to verify every delivery.
+
+## Rotating the secret
+
+You can rotate the signing secret. During a rotation, the previous secret stays valid for a short window and deliveries are signed with both the old and the new secret, so you can update your endpoint within the window without missing a record.
+
+<CardGroup cols={2}>
+  <Card title="Verify signatures" icon="shield-check" href="/compliance-export-webhooks/verify-signatures">
+    Confirm a delivery genuinely came from Klariqo.
+  </Card>
+  <Card title="Record envelope" icon="box" href="/compliance-export-webhooks/record-envelope">
+    The shape of the event you receive.
+  </Card>
+</CardGroup>

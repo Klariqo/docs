@@ -1,0 +1,87 @@
+---
+title: "Verify webhook signatures"
+description: "How to verify that a compliance export webhook came from Klariqo before you trust it."
+---
+
+Every compliance export webhook is signed. Verify the signature before you process the event, fetch the signed vCon, or store anything from the delivery.
+
+Klariqo uses the Standard Webhooks signing format.
+
+## Headers
+
+Each delivery includes these headers:
+
+| Header | Meaning |
+| --- | --- |
+| `webhook-id` | The unique delivery id used in the signed content. |
+| `webhook-timestamp` | The timestamp used in the signed content. |
+| `webhook-signature` | The signature value, formatted as `v1,<base64>`. |
+
+Your endpoint also receives a signing secret for this webhook endpoint. The secret is formatted as `whsec_<base64>`.
+
+## What is signed
+
+The signed content is:
+
+```text
+id.timestamp.body
+```
+
+Where:
+
+| Part | Source |
+| --- | --- |
+| `id` | The `webhook-id` header. |
+| `timestamp` | The `webhook-timestamp` header. |
+| `body` | The raw request body exactly as Klariqo sent it. |
+
+<Warning>
+  Verify against the raw request body. Do not parse JSON and then stringify it again before verification. Even a harmless formatting change can make the signature check fail.
+</Warning>
+
+## Verification steps
+
+<Steps>
+  <Step title="Read the headers">
+    Read `webhook-id`, `webhook-timestamp`, and `webhook-signature` from the request.
+  </Step>
+  <Step title="Check the timestamp">
+    Reject requests with a large timestamp skew. This helps prevent old signed deliveries from being replayed later.
+  </Step>
+  <Step title="Use the raw body">
+    Build the signed content from the header id, header timestamp, and the raw request body.
+  </Step>
+  <Step title="Verify the signature">
+    Verify the `v1,<base64>` signature with the endpoint signing secret.
+  </Step>
+  <Step title="Process only after verification">
+    Only process the event after the signature passes.
+  </Step>
+</Steps>
+
+## What to reject
+
+Reject the request if:
+
+- A required signature header is missing.
+- `webhook-signature` is not in the `v1,<base64>` format.
+- The timestamp has a large skew.
+- The signature does not verify against the raw body.
+- The same delivery id has already been processed.
+
+## After verification
+
+After the signature passes, process the event as a pointer to the compliance record. The webhook payload does not contain the full signed vCon inline. It contains an envelope and an expiring download URL for the signed vCon.
+
+<CardGroup cols={2}>
+  <Card title="Compliance export webhooks" icon="webhook" href="/compliance-export-webhooks/overview">
+    See how compliance record exports work.
+  </Card>
+  <Card title="Record envelope" icon="box" href="/compliance-export-webhooks/record-envelope">
+    Understand the event payload you receive.
+  </Card>
+</CardGroup>
+
+<Warning>
+  Signature verification proves delivery integrity for the webhook request. It is not a legal judgment. Exported records support evidence, provenance, and audit-readiness, but you remain responsible for scripts, consent, retention, storage, and counsel review.
+</Warning>
