@@ -1,0 +1,54 @@
+---
+title: "What is a vCon"
+description: "How the vCon conversation-record format turns a call into a structured, signed compliance record."
+---
+
+A vCon is a structured conversation record. It gives a call a standard shape: who participated, what happened in the dialog, and what analysis was attached afterward.
+
+Klariqo uses vCons as the container for compliance records. We issue signed vCons for calls covered by an active scorecard. We do not own the vCon standard.
+
+## Current IETF status
+
+vCon is an IETF-track conversation-record format under the IETF Virtualized Conversations working group. As of June 27, 2026, the core vCon document is an active working-group Internet-Draft, not a published RFC.
+
+That means vCon is work in progress in the IETF process. It should not be described as a ratified RFC standard yet.
+
+The vCon effort is associated with the IETF vCon working group, Jeff Pulver, and conserver.io.
+
+## What a vCon contains
+
+<Steps>
+  <Step title="Parties">
+    The participants in the conversation. In a call record, this is the structured place for the people or systems involved in the call.
+  </Step>
+  <Step title="Dialog">
+    The conversation itself. In a Klariqo compliance record, the dialog includes the transcript, a reference to the recording, and a SHA-512 content hash that fingerprints the recording.
+  </Step>
+  <Step title="Analysis">
+    Structured review data attached to the conversation. Klariqo records can include transcript analysis, quality and compliance results, sentiment, and telemetry.
+  </Step>
+  <Step title="Signature">
+    Klariqo signs the vCon with a JWS signature (RS256) that carries Klariqo's signing certificate. This makes later edits detectable.
+  </Step>
+</Steps>
+
+## Klariqo's role
+
+Klariqo is the issuer of the signed call record. The record uses the vCon format underneath, then adds Klariqo's signature and analysis blocks.
+
+That distinction matters. vCon is the conversation-record format. Klariqo's compliance record is a signed vCon issued by Klariqo for an in-scope call.
+
+<CardGroup cols={2}>
+  <Card title="The evidence chain" icon="link" href="/compliance-records/evidence-chain">
+    See how a call becomes a signed, witnessed, verifiable record.
+  </Card>
+  <Card title="Signed vCons" icon="signature" href="/compliance-records/signed-vcons">
+    Learn how the signature makes a record tamper-evident.
+  </Card>
+</CardGroup>
+
+## Why this matters
+
+A vCon gives the call one portable record instead of scattered artifacts. The transcript, recording reference, recording fingerprint, QA result, sentiment, and signature travel together.
+
+That gives you evidence and provenance in one place. It does not make you compliant by itself. You remain responsible for your scripts, consent practices, retention policy, and counsel review.

@@ -1,0 +1,44 @@
+---
+title: "Compliance records"
+description: "What a Klariqo compliance record is, what it contains, and how you can trust it."
+---
+
+Every in-scope call on Klariqo produces a compliance record: a signed, independently verifiable account of the call that sits on top of the dialer you already run. This section explains what is in that record and why you can trust it.
+
+If you read one page, read [the evidence chain](/compliance-records/evidence-chain). It walks a call from audio to verified record in one place.
+
+## What a record contains
+
+<Steps>
+  <Step title="The parties and the dialog">
+    Who was on the call and the conversation itself: the transcript, a reference to the recording, and the SHA-512 content hash that fingerprints that recording.
+  </Step>
+  <Step title="The analysis">
+    Signed analysis attached to the record: the quality and compliance review of the call, and its sentiment.
+  </Step>
+  <Step title="The signature">
+    A JWS signature over the whole record, carrying Klariqo's signing certificate, so any later change is detectable.
+  </Step>
+</Steps>
+
+## Why you can trust it
+
+<CardGroup cols={3}>
+  <Card title="Signed" icon="signature" href="/compliance-records/signed-vcons">
+    Tamper-evident. Any edit after signing breaks the signature.
+  </Card>
+  <Card title="Witnessed" icon="user-shield" href="/compliance-records/third-party-witnessing">
+    An independent party attests the record existed, without seeing its contents.
+  </Card>
+  <Card title="Verifiable" icon="circle-check" href="/compliance-records/verify-a-vcon">
+    You can check any record yourself, no trust in Klariqo required.
+  </Card>
+</CardGroup>
+
+## The standard underneath
+
+Klariqo records are vCons, the IETF-track standard for a conversation record. Klariqo issues a signed call record; it does not own the standard. See [what is a vCon](/compliance-records/what-is-a-vcon).
+
+<Warning>
+  A compliance record is evidence and provenance, not a legal judgment. It proves what the record contains and that it was not altered. It does not make you compliant, and you remain responsible for your scripts, consent, retention, and counsel review. See [the evidence boundary](/compliance-records/evidence-boundary).
+</Warning>

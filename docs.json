@@ -1,20 +1,29 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "Klariqo",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#a3ff0f",
+    "light": "#a3ff0f",
+    "dark": "#84cc00"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "pages": [
       {
-        "group": "Getting Started",
+        "group": "Get started",
         "pages": [
-          "index",
-          "quickstart"
+          "index"
+        ]
+      },
+      {
+        "group": "Compliance records",
+        "pages": [
+          "compliance-records/overview",
+          "compliance-records/evidence-chain",
+          "compliance-records/what-is-a-vcon",
+          "compliance-records/verify-a-vcon",
+          "compliance-records/third-party-witnessing"
         ]
       }
     ],

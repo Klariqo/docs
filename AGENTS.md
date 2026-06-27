@@ -14,20 +14,24 @@
 
 ## Terminology
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+- "Compliance record" or "evidence record" for the signed call record. It is a vCon underneath; say vCon when referring to the standard.
+- "The dialer you already run" for the customer's existing call system. Klariqo sits on top of it, it does not replace it.
+- "Verifier" is the public tool that checks a record. "Witness" is the independent third party. Do not say the witness sees the call content.
+- "Scorecard" is the customer-configured QA ruleset. "Evidence chain" is the end-to-end flagship story.
 
 ## Style preferences
 
-{/* Add any project-specific style rules below */}
-
 - Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
+- Keep sentences concise, one idea per sentence
 - Use sentence case for headings
 - Bold for UI elements: Click **Settings**
 - Code formatting for file names, commands, paths, and code references
+- No em dashes. Use commas, periods, parentheses, or "and" / "but".
+- Honesty line: describe provenance, evidence, and audit-readiness. Never claim Klariqo makes a customer legally compliant, wins a lawsuit, or automatically handles consent.
+- All examples are synthetic and clearly labeled. Never use a real call, transcript, phone number, or customer name.
 
 ## Content boundaries
 
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+- Document the product's value, outcomes, and the integration contracts a customer needs (schemas, signatures, setup steps).
+- Do NOT document internal infrastructure, credentials, hostnames, IP addresses, internal system or table names, or how the platform is built. Connection values a customer needs are delivered in their dashboard, not published here.
+- When a capability is not shipped yet, label it as planned. No vapor.

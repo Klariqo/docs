@@ -1,0 +1,48 @@
+---
+title: "Verify a vCon"
+description: "Check any Klariqo record yourself, in your browser, in seconds. You do not have to trust us."
+---
+
+A compliance record is only as good as your ability to check it. You do not have to take Klariqo's word that a record is genuine. Any record can be verified independently in the public verifier, which runs entirely in your browser.
+
+## Verify a record
+
+<Steps>
+  <Step title="Open the verifier">
+    Go to [klariqo.com/vcon](https://klariqo.com/vcon/). Nothing is uploaded to a server. The check runs locally in your browser.
+  </Step>
+  <Step title="Load the record">
+    Paste the record, or upload the `.vcon.json` file, or try the built-in sample to see a valid result first.
+  </Step>
+  <Step title="Read the result">
+    The verifier tells you whether the signature is valid, whether the record was altered, and whether it was signed by Klariqo's key.
+  </Step>
+</Steps>
+
+## What the results mean
+
+| Result | What it means |
+| --- | --- |
+| Signature valid, signed by Klariqo's key | The record has not been altered since signing, and it was signed by Klariqo's published key. |
+| Signature valid, not Klariqo's key | The signature is valid, but the signer is not Klariqo. Klariqo makes no claim about that record. |
+| Invalid signature | The record was altered after signing, or its signature does not match the certificate. A genuine, unaltered record passes this check. |
+| No signature present | The record carries no signature to verify. |
+| Not a vCon | The file is not a vCon record. |
+| Encrypted | The record is encrypted and cannot be read or verified without the decryption key. |
+
+## What "signed by Klariqo's key" means
+
+Klariqo publishes its signing key, and the verifier confirms a record was signed by that key. This is self-asserted: we vouch for our own key, we are not a certificate authority. The strong, independent guarantee is the tamper check. A valid signature proves the record's contents are exactly what was signed, byte for byte, including the SHA-512 fingerprint of the recording. For an outside attestation that the record existed at a point in time, see [third-party witnessing](/compliance-records/third-party-witnessing).
+
+<Warning>
+  Verifying a record confirms its integrity. It is not a legal judgment. A valid record proves what the record contains and that it was not altered. It does not by itself make a call lawful or make you compliant. See [the evidence boundary](/compliance-records/evidence-boundary).
+</Warning>
+
+<CardGroup cols={2}>
+  <Card title="Signed vCons" icon="signature" href="/compliance-records/signed-vcons">
+    How the signature makes a record tamper-evident.
+  </Card>
+  <Card title="The evidence chain" icon="link" href="/compliance-records/evidence-chain">
+    Where verification fits in the full story.
+  </Card>
+</CardGroup>
