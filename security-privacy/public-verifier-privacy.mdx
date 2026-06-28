@@ -1,0 +1,25 @@
+---
+title: "Public verifier privacy"
+description: "The public verifier runs entirely in your browser. Nothing you check is uploaded to Klariqo."
+---
+
+The public verifier at [klariqo.com/vcon](https://klariqo.com/vcon/) checks a compliance record's signature. It is built to be private: the check runs entirely in your browser.
+
+## What this means
+
+- When you paste or upload a record, it is verified locally in your browser. The record is not sent to Klariqo or to any server.
+- The verifier works on any vCon, not only Klariqo's, and you do not need a Klariqo account to use it.
+- Because the check is local, you can verify a record that contains sensitive call content without exposing that content to anyone.
+
+## Why it is built this way
+
+Verification is only trustworthy if you do not have to trust the verifier. Running it in your browser means you can confirm a record's integrity yourself, independently, without handing the record to a third party.
+
+<CardGroup cols={2}>
+  <Card title="Verify a vCon" icon="circle-check" href="/compliance-records/verify-a-vcon">
+    Check a record's integrity, step by step.
+  </Card>
+  <Card title="Signed vCons" icon="signature" href="/compliance-records/signed-vcons">
+    What the signature proves.
+  </Card>
+</CardGroup>

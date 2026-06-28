@@ -1,0 +1,52 @@
+---
+title: "Connection status and troubleshooting"
+description: "Confirm Klariqo is registered on your VICIdial, and fix the common connection issues."
+---
+
+After you connect VICIdial, Klariqo registers as a SIP peer on your system. This page helps you confirm it is working and resolve the common issues.
+
+## Confirm Klariqo is registered
+
+On your VICIdial server, run:
+
+```text
+asterisk -rx "sip show peers" | grep klariqo
+```
+
+You want to see the `klariqo-ai` peer with status `OK`. If it shows `UNKNOWN` or `UNREACHABLE`, Klariqo has not registered yet. Re-check the IP whitelist and that SIP was reloaded, then contact Klariqo.
+
+## "Extension unavailable" or "Agent not available"
+
+Work through these in order:
+
+- **Is the Klariqo IP whitelisted?** Confirm `35.232.23.234` is allowed on both the server firewall and the cloud-provider firewall.
+- **Was SIP reloaded?** Run `asterisk -rx "sip reload"`.
+- **Is the extension registered?** Run `asterisk -rx "sip show peers"` and look for `klariqo-ai`.
+- **Are Klariqo's packets arriving at all?** Run `tcpdump -ni any port 5060` while Klariqo tries to connect. Zero packets means a firewall, usually the cloud layer, is dropping them upstream. This is the most decisive test when everything looks right but registration keeps failing.
+
+## No audio or one-way audio
+
+- **Is the RTP port range open?** Open UDP ports `16384` to `32768` to the Klariqo IP.
+- **Is NAT configured?** Your Asterisk should have its external address set to the server's public IP.
+
+## Wrong AI script, or transfer goes to the wrong place
+
+Contact Klariqo with your extension name or your transfer extension number, and we will check the configuration linked to it.
+
+## Verify the transfer dialplan
+
+If you set up transfers, confirm the entry exists (replace `9999` with the extension you used):
+
+```text
+asterisk -rx "dialplan show 9999@default"
+```
+
+If nothing shows, the Carriers entry was not saved. Re-open the carrier in VICIdial Admin and confirm the Dialplan Entry field is filled in. The default context is `[default]`. If your install puts it elsewhere, swap the context name in the command.
+
+## What to send Klariqo if you are stuck
+
+- A screenshot of your phone extension settings.
+- A screenshot of your remote agent settings.
+- The exact error or behavior you see.
+- The time of the test call, including your timezone.
+- Whether you heard ringing, the AI voice, silence, or an unavailable message.

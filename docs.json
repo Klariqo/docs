@@ -53,6 +53,7 @@
         "pages": [
           "dialer-integrations/overview",
           "dialer-integrations/connect-vicidial",
+          "dialer-integrations/troubleshooting",
           "dialer-integrations/twilio"
         ]
       },
@@ -70,7 +71,8 @@
         "group": "Security and privacy",
         "pages": [
           "security-privacy/overview",
-          "security-privacy/data-in-a-compliance-record"
+          "security-privacy/data-in-a-compliance-record",
+          "security-privacy/public-verifier-privacy"
         ]
       }
     ],
