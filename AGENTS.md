@@ -34,4 +34,4 @@
 
 - Document the product's value, outcomes, and the integration contracts a customer needs (schemas, signatures, setup steps).
 - Do NOT document internal infrastructure, credentials, hostnames, IP addresses, internal system or table names, or how the platform is built. Connection values a customer needs are delivered in their dashboard, not published here.
-- When a capability is not shipped yet, label it as planned. No vapor.
+- Do NOT add "coming soon", "planned", or placeholder pages, notes, or sections. They go stale and force someone to remember to clean them up. Document only what is live. When a feature ships, add its real page then.
