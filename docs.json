@@ -12,7 +12,9 @@
     "metatags": {
       "og:type": "website",
       "og:site_name": "Klariqo",
+      "og:image": "https://docs.klariqo.com/images/og.png",
       "twitter:card": "summary_large_image",
+      "twitter:image": "https://docs.klariqo.com/images/og.png",
       "robots": "index, follow"
     },
     "indexing": "all"
