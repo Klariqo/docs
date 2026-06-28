@@ -57,12 +57,6 @@
         ]
       },
       {
-        "group": "CRM integrations",
-        "pages": [
-          "crm-integrations/overview"
-        ]
-      },
-      {
         "group": "Compliance export webhooks",
         "pages": [
           "compliance-export-webhooks/overview",
