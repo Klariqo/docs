@@ -1,0 +1,55 @@
+---
+title: "AI-call QA"
+description: "How Klariqo reviews AI calls against your active scorecard after the call ends."
+---
+
+AI-call QA reviews Klariqo AI calls after the call ends. For a client with an active scorecard, the QA result is attached to the signed compliance record.
+
+The review uses your scorecard. It does not use the AI agent's call prompt as the review rules.
+
+## Scorecard versus prompt
+
+The scorecard and the call prompt have different jobs.
+
+| Item | Purpose |
+| --- | --- |
+| Scorecard | The review ruleset used to check the completed call. |
+| Call prompt | The AI agent's instructions during the live conversation. |
+
+That separation matters. The prompt tells the AI agent how to handle the call. The scorecard tells Klariqo how to review what happened after the call.
+
+## What happens after the call
+
+<Steps>
+  <Step title="The call ends">
+    Klariqo finishes the AI call and prepares the call record.
+  </Step>
+  <Step title="The active scorecard is applied">
+    If the client has an active scorecard, the call is reviewed against the enabled required elements and prohibited claims.
+  </Step>
+  <Step title="Classification flags are copied">
+    QA copies the call's honest classification flags, such as outcome and voicemail state, rather than re-deciding them during review.
+  </Step>
+  <Step title="The result joins the record">
+    The QA result is attached to the signed compliance record, so the review travels with the evidence.
+  </Step>
+</Steps>
+
+## What the result can show
+
+The result uses the same QA result structure as other Klariqo-reviewed calls. A call can pass, need review, fail, be not applicable, or temporarily show an error while review is retried.
+
+A scored call has an `overall_score` from 0 to 100. An unscored call has `null`, which is not a zero and is excluded from averages.
+
+<CardGroup cols={2}>
+  <Card title="Scorecards" icon="list-check" href="/call-qa/scorecards">
+    See the operating rules AI calls are reviewed against.
+  </Card>
+  <Card title="QA results" icon="clipboard-check" href="/call-qa/qa-results">
+    Learn how to read status, score, and compliance status.
+  </Card>
+</CardGroup>
+
+<Warning>
+  AI-call QA supports evidence, provenance, and audit-readiness. It shows how a call matched your configured scorecard. It does not make you compliant, prove consent by itself, approve your scripts, or replace counsel review.
+</Warning>

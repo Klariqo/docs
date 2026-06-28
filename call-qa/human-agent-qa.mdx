@@ -1,0 +1,57 @@
+---
+title: "Human-agent QA"
+description: "How Klariqo reviews human-agent VICIdial calls from recordings using the same scorecard QA."
+---
+
+Human-agent QA reviews calls handled by your human agents on VICIdial. Klariqo reviews those calls from the call recordings.
+
+The same scorecard QA and sentiment analysis apply. This lets you use one operating ruleset across AI calls and human-agent calls.
+
+## How human-agent QA works
+
+<Steps>
+  <Step title="The human-agent call is recorded">
+    The review starts from the customer's VICIdial call recording.
+  </Step>
+  <Step title="The recording is transcribed">
+    Klariqo transcribes the recording and attributes turns to the agent or the customer.
+  </Step>
+  <Step title="The same scorecard is applied">
+    The call is reviewed against your configured required elements and prohibited claims.
+  </Step>
+  <Step title="Sentiment is attached">
+    Sentiment analysis is attached alongside the QA result.
+  </Step>
+  <Step title="The result joins the record">
+    The QA result and sentiment become part of the signed compliance record.
+  </Step>
+</Steps>
+
+## Role attribution caveat
+
+Role attribution is inferred from the audio. It identifies which speaker is the agent and which speaker is the customer, but it is not perfect.
+
+Attribution is less certain on a single-channel, mono recording than on a dual-channel recording. When a turn cannot be confidently attributed, the record flags it as `role_unattributed`.
+
+<Warning>
+  Do not treat role attribution as perfect. Review flagged turns when attribution confidence matters for your workflow.
+</Warning>
+
+## Same rules across AI and human calls
+
+Human-agent QA uses the same scorecard structure as AI-call QA. Required elements, prohibited claims, critical checks, and enabled checks work the same way.
+
+That gives you one review language for your operating rules, whether the call was handled by Klariqo AI or by a human agent on your dialer.
+
+<CardGroup cols={2}>
+  <Card title="Scorecards" icon="list-check" href="/call-qa/scorecards">
+    See the operating rules human-agent calls are reviewed against.
+  </Card>
+  <Card title="QA results" icon="clipboard-check" href="/call-qa/qa-results">
+    Learn how to read status, score, and compliance status.
+  </Card>
+</CardGroup>
+
+<Warning>
+  Human-agent QA supports evidence, provenance, and audit-readiness. It shows how a call matched your configured scorecard. It does not make you compliant, prove consent by itself, approve your scripts, or replace counsel review.
+</Warning>

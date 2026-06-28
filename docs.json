@@ -45,7 +45,9 @@
         "pages": [
           "call-qa/overview",
           "call-qa/scorecards",
-          "call-qa/qa-results"
+          "call-qa/qa-results",
+          "call-qa/ai-call-qa",
+          "call-qa/human-agent-qa"
         ]
       },
       {
