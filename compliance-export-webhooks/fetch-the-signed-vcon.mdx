@@ -1,6 +1,6 @@
 ---
 title: "Fetch the signed vCon"
-description: "Retrieve the signed compliance record from the link in a webhook, then verify it."
+description: "Retrieve the signed compliance record from the short-lived link in a compliance export webhook, then verify its JWS signature before you store it."
 ---
 
 A webhook delivers a pointer, not the record itself. To get the record, fetch it from the download URL in the event. The URL is short-lived and tied to that one record.
