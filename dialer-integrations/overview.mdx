@@ -3,13 +3,16 @@ title: "Dialer integrations"
 description: "How Klariqo sits on top of the dialer you already run, starting with VICIdial."
 ---
 
-Klariqo connects to the dialer you already run. It does not replace your dialer, your campaigns, or your agents. It joins as a layer on top, handling AI calls, reviewing calls for compliance, and producing signed records on your existing system.
+Klariqo connects to the dialer you already run. It does not replace your dialer, your campaigns, or your agents. It joins as a layer on top. Most customers connect for **compliance and QA**, where Klariqo reviews your calls from their recordings and produces signed records. Klariqo can also run its **AI voice agent** on your dialer.
 
 ## Connect your dialer
 
 <CardGroup cols={2}>
-  <Card title="VICIdial" icon="phone" href="/dialer-integrations/connect-vicidial">
-    Connect Klariqo to your VICIdial as a remote SIP agent. The primary path, set up by your VICIdial administrator.
+  <Card title="VICIdial (compliance and QA)" icon="clipboard-check" href="/dialer-integrations/connect-vicidial">
+    Review your calls for quality and compliance, with no AI on your calls. The default, lightest setup: recording access only.
+  </Card>
+  <Card title="VICIdial (voice AI)" icon="phone" href="/dialer-integrations/connect-vicidial-voice">
+    Run Klariqo's AI voice agent on your VICIdial as a remote SIP agent. A heavier setup, done by your VICIdial administrator.
   </Card>
   <Card title="Twilio (bring your own)" icon="plug" href="/dialer-integrations/twilio">
     Use your own Twilio number with Klariqo's voice AI. Good for inbound and simpler setups.

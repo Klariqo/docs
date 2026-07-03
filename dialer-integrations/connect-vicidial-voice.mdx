@@ -1,0 +1,127 @@
+---
+title: "Connect VICIdial for voice AI"
+description: "Run Klariqo's AI voice agent on your VICIdial as a remote SIP agent. A customer-side setup your VICIdial admin can do."
+---
+
+Klariqo connects to your VICIdial as a remote SIP agent so its AI voice agent can handle calls. It does not replace your dialer. The setup is the same as adding a new remote SIP phone and agent.
+
+<Note>
+  Only want Klariqo to review your calls for QA and compliance, with no AI on your calls? That is the default, lighter path. See [Connect VICIdial](/dialer-integrations/connect-vicidial). It needs only recording access, no SIP.
+</Note>
+
+## What Klariqo sends you
+
+Keep these open while you work through the setup.
+
+| Field | Value |
+| --- | --- |
+| SIP extension name | `klariqo-ai` |
+| SIP password | Sent to you securely |
+| Klariqo server IP | `35.232.23.234` |
+| Number of lines | `10` |
+
+<Note>
+  These are the standard values. You can use your own extension name, dial plan number, and agent IDs. Just share your chosen values with Klariqo so we match our configuration.
+</Note>
+
+## Step 1: Create a phone extension
+
+In your VICIdial admin panel, go to **Admin > Phones > Add a New Phone**, and fill in:
+
+| Field | What to enter |
+| --- | --- |
+| Phone Extension | `klariqo-ai`, or the exact value Klariqo gave you. |
+| Dial Plan Number | Any unused number, like `800` or `8400`. Write it down. |
+| Server IP | Select your VICIdial server from the dropdown. |
+| Protocol | `SIP` |
+| Registration Password | The password Klariqo gave you. Use it exactly, with no extra characters. |
+| Active | `Y` |
+| Voicemail | Leave empty or set to `N`. |
+
+Click **Submit**.
+
+## Step 2: Allow Klariqo's server to connect
+
+Klariqo connects from a single IP, `35.232.23.234`. The easiest way to allow it is VICIdial's built-in IP Lists.
+
+<Steps>
+  <Step title="Enable IP Lists">
+    Go to **Admin > System Settings**, set **Allow IP Lists** to `1`, and save.
+  </Step>
+  <Step title="Allow your user to modify IP Lists">
+    Go to **Admin > Users**, open your admin user, set **Modify IP Lists** to `1`, and save.
+  </Step>
+  <Step title="Add the Klariqo IP">
+    Go to **Admin > IP Lists > Add An IP List**. Create a list (for example, named `ViciWhite`) and add `35.232.23.234` to it. Submit.
+  </Step>
+  <Step title="Wait for it to activate">
+    Give it about 60 seconds to sync, then Klariqo can register.
+  </Step>
+</Steps>
+
+<Warning>
+  If your VICIdial runs at a cloud provider (AWS, GCP, Hetzner, DigitalOcean, Linode, and others), the provider runs its own firewall above the server's. Even with the server firewall open, the cloud firewall can drop our packets first. This is the single most common reason a setup stalls. Add an inbound rule allowing UDP and TCP on port 5060 (or your custom SIP port) from `35.232.23.234`. To check it is open, run `tcpdump -ni any port 5060` on your VICIdial machine while Klariqo tries to connect. If you see packets from `35.232.23.234`, the cloud firewall is open. If you see none, it is still blocking.
+</Warning>
+
+If you do not manage the server yourself, send the IP `35.232.23.234` to whoever does and ask them to whitelist it and reload SIP, including the cloud-provider firewall.
+
+## Step 3: Create a remote agent
+
+This tells VICIdial to send calls to the extension you created. Go to **Admin > Remote Agents > Add a New Remote Agent**, and fill in:
+
+| Field | What to enter |
+| --- | --- |
+| Remote Agent ID | Any number, like `1001`. |
+| User (Agent) | A name for this agent, like `klariqo`. |
+| External Extension | The dial plan number from Step 1. |
+| Number of Lines | `10`, or whatever Klariqo told you. |
+| Campaign | The campaign you want Klariqo to handle. |
+| Status | `ACTIVE` |
+
+Click **Submit**.
+
+<Note>
+  If you add a second remote agent later for another campaign, give it a User ID range that does not overlap the first. VICIdial reserves a block of consecutive User IDs per agent, and an overlap makes registration fail silently after a couple of minutes.
+</Note>
+
+## Step 4: Submit your configuration
+
+Submit your SIP details from your Klariqo dashboard, under [Settings, Dialer Setup](https://app.klariqo.com/settings?tab=dialer). This is where every live client manages their VICIdial connection. You will enter:
+
+- Your VICIdial server IP and SIP port. The default is `5060`, but many installs use a custom port. Confirm yours with `asterisk -rx "sip show settings" | grep -i bindport`.
+- The phone extension name (`klariqo-ai`) and registration password from Step 1.
+- An optional transfer phone number or VICIdial extension.
+- Confirmation that `35.232.23.234` is whitelisted on your server.
+
+Registration happens automatically once you save. Keep `35.232.23.234` whitelisted.
+
+## Step 5: Set up transfers
+
+Optional for inbound-only use, required for outbound campaigns where Klariqo transfers qualified leads to a human closer. VICIdial's **Carriers** section is the canonical place to add transfer dialplan entries. It writes to your Asterisk config and reloads automatically, with no SSH or server restart.
+
+<Steps>
+  <Step title="Open Carriers">
+    Go to **Admin > Carriers**, and edit an existing carrier or add a new one for the transfer destination.
+  </Step>
+  <Step title="Add the dialplan entry">
+    In the **Dialplan Entry** field, paste the transfer dialplan, using an unused extension number (for example, `9999`):
+
+    ```text
+    exten => 9999,1,Dial(SIP/YOUR_CARRIER_TRUNK/+1TRANSFER_PHONE_NUMBER,120,To)
+    exten => 9999,n,Hangup()
+    ```
+
+    Replace `9999` with any unused extension, `YOUR_CARRIER_TRUNK` with your outbound trunk name, and `+1TRANSFER_PHONE_NUMBER` with the destination number.
+  </Step>
+  <Step title="Save and share">
+    Save. VICIdial reloads the dialplan automatically. Share the extension number with Klariqo so we configure the AI to use it.
+  </Step>
+</Steps>
+
+## Test it
+
+Once Klariqo confirms your extension is registered, load a test lead using your own phone number and let the dialer call it. When you pick up, you should hear the Klariqo AI agent greet you, hold a conversation with clear audio both ways, and transfer you to your closer when you qualify.
+
+## Security
+
+Klariqo registers with SIP digest authentication. Call audio to the Klariqo pipeline travels over an encrypted WebSocket, and recordings are stored in encrypted storage.

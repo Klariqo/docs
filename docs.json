@@ -57,6 +57,7 @@
         "pages": [
           "dialer-integrations/overview",
           "dialer-integrations/connect-vicidial",
+          "dialer-integrations/connect-vicidial-voice",
           "dialer-integrations/troubleshooting",
           "dialer-integrations/twilio"
         ]
