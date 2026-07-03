@@ -27,7 +27,7 @@ An endpoint is the HTTPS URL where Klariqo delivers signed records. You add it i
 
 ## Rotating the secret
 
-You can rotate the signing secret. During a rotation, the previous secret stays valid for a short window and deliveries are signed with both the old and the new secret, so you can update your endpoint within the window without missing a record.
+You can rotate the signing secret. During a rotation, the previous secret stays valid for a short window. Deliveries are signed with both the old and the new secret, so you can update your endpoint within the window without missing a record.
 
 <CardGroup cols={2}>
   <Card title="Verify signatures" icon="shield-check" href="/compliance-export-webhooks/verify-signatures">
