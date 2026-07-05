@@ -28,7 +28,13 @@ Klariqo reads your call recordings through VICIdial's built-in non-agent API. To
     The web address of your VICIdial admin and API, for example `https://dialer.yourcompany.com`.
   </Step>
   <Step title="An API user for recordings">
-    A VICIdial user with API access and permission to view reports and lead information, so Klariqo can list recordings, retrieve them, and read each call's caller number and direction for the record. Klariqo uses read functions only: `agent_stats_export` and `recording_lookup` (to find and fetch recordings), `lead_field_info` (to read the caller's number and name, which needs the user's "GET LEAD INFO" permission), and `phone_number_log` (to confirm whether each call was inbound or outbound). No write access is needed.
+    A VICIdial user with API access and permission to view reports and lead information. Klariqo uses this account to list recordings, retrieve them, and read each call's caller number and direction for the record.
+
+    Klariqo uses read functions only, and no write access is needed:
+
+    - `agent_stats_export` and `recording_lookup` to find and fetch recordings.
+    - `lead_field_info` to read the caller's number and name. This needs the user's "GET LEAD INFO" permission.
+    - `phone_number_log` to confirm whether each call was inbound or outbound.
   </Step>
   <Step title="Reachability">
     Klariqo must be able to reach your VICIdial API and download the recording URLs it returns. If your system restricts API or recording access by IP, allow the Klariqo IP we give you during setup.
@@ -45,7 +51,7 @@ Before any review starts, use the **Test connection** button in your Klariqo das
 
 ## What each record captures
 
-Every reviewed call becomes a record carrying the caller's phone number, the agent who handled it, the timestamp, the duration, and the call direction, all read directly from your dialer's own call logs, alongside the QA score and the signed record.
+Every reviewed call becomes a record that carries the caller's phone number, the agent who handled it, the timestamp, the duration, and the call direction. Klariqo reads these values directly from your dialer's own call logs, and attaches them to the QA score and the signed record.
 
 Direction is resolved per call, never assumed, because it affects consent obligations:
 
