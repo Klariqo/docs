@@ -1,6 +1,6 @@
 ---
 title: "Data in a compliance record"
-description: "What data a Klariqo compliance record may contain (parties, transcript, recording hash, QA), and what the third-party witness never sees or receives."
+description: "What data a Klariqo compliance record may contain (parties, transcript, recording hash, QA), and what the trusted timestamp authority never sees or receives."
 ---
 
 A Klariqo compliance record is a signed vCon issued for a call covered by an active scorecard. It brings the call record, analysis, fingerprint, and signature into one verifiable container.
@@ -65,15 +65,15 @@ This example is synthetic. It is not a real call, transcript, customer record, o
 }
 ```
 
-## What the witness receives
+## What the timestamp authority receives
 
-The third-party witness records the record's fingerprint plus minimal audit identifiers. It does not receive the transcript, audio, phone numbers, or QA content.
+The trusted timestamp authority (DigiCert) receives only the record's SHA-256 fingerprint. It does not receive the transcript, audio, phone numbers, or QA content.
 
-That distinction matters. Witnessing helps show that a specific signed record existed, without sending the call content to the witness.
+That distinction matters. The timestamp helps show that a specific signed record existed at a point in time, without sending the call content to any outside party.
 
 <CardGroup cols={2}>
-  <Card title="Third-party witnessing" icon="user-shield" href="/compliance-records/third-party-witnessing">
-    See what the independent witness records, and what it never receives.
+  <Card title="Verify the timestamp" icon="clock" href="/compliance-records/verify-the-timestamp">
+    See what the trusted timestamp records, and what it never receives.
   </Card>
   <Card title="Verify a vCon" icon="circle-check" href="/compliance-records/verify-a-vcon">
     Check whether a signed record is valid or has been altered.

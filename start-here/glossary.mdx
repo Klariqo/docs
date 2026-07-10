@@ -1,6 +1,6 @@
 ---
 title: "Glossary"
-description: "Key Klariqo terms defined in one place: vCon, compliance record, content hash, JWS signature, verifier, third-party witness, scorecard, QA result, and more."
+description: "Key Klariqo terms defined in one place: vCon, compliance record, content hash, JWS signature, verifier, trusted timestamp, scorecard, QA result, and more."
 ---
 
 ## vCon
@@ -27,9 +27,9 @@ Self-asserted means Klariqo publishes its own signing key. Klariqo is not a cert
 
 The public verifier is the in-browser tool at `klariqo.com/vcon` that checks a vCon. It reports whether the signature is valid, whether the record was altered, and whether it was signed by Klariqo's published key.
 
-## Third-party witness
+## Trusted timestamp
 
-A third-party witness is the independent witness that records the record's fingerprint plus minimal audit identifiers. JLINC does not receive the transcript, audio, phone numbers, or QA content.
+A trusted timestamp is an RFC 3161 timestamp token that Klariqo obtains from DigiCert, a global certificate authority Klariqo does not control. It stamps the record's fingerprint with the time, so anyone can independently confirm the record existed at that moment and was not backdated. DigiCert receives only the fingerprint, never the transcript, audio, phone numbers, or QA content.
 
 ## Scorecard
 

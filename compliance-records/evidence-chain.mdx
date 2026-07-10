@@ -1,6 +1,6 @@
 ---
 title: "The evidence chain"
-description: "How a phone call becomes a Klariqo compliance record step by step: recording, content hash, transcript, QA analysis, JWS signature, and third-party witness."
+description: "How a phone call becomes a Klariqo compliance record step by step: recording, content hash, transcript, QA analysis, JWS signature, and a trusted timestamp."
 ---
 
 A call happens today. Months later, someone asks three questions about it: what was actually said, can you prove the record was not edited, and can an independent party confirm the record existed. Klariqo produces a record that answers all three. This page walks the chain end to end.
@@ -25,8 +25,8 @@ It runs the same way for an AI call and for a human-agent call, on the dialer yo
   <Step title="QA and sentiment are attached">
     The call's quality and compliance review (pass, needs review, or fail) and its sentiment are attached as signed analysis blocks inside the record. See [call QA](/call-qa/overview).
   </Step>
-  <Step title="A third party witnesses it">
-    An independent witness (JLINC) records the record's fingerprint plus minimal audit identifiers. It does not receive the transcript, the audio, phone numbers, or the QA content. This is an outside attestation that this exact record existed at that point in time. See [third-party witnessing](/compliance-records/third-party-witnessing).
+  <Step title="The record is timestamped">
+    A trusted timestamp (RFC 3161) is obtained from DigiCert, a global certificate authority Klariqo does not control. It stamps the record's fingerprint with the time, so anyone can later confirm this exact record existed at that moment and was not backdated. DigiCert receives only the fingerprint, never the transcript, audio, phone numbers, or QA content. See [verify the timestamp](/compliance-records/verify-the-timestamp).
   </Step>
   <Step title="Anyone can verify it">
     The signed record can be checked in the public verifier, which reports whether it is valid, altered, unsigned, or not issued by Klariqo. You do not have to take our word for it. See [verify a vCon](/compliance-records/verify-a-vcon).
@@ -41,7 +41,7 @@ It runs the same way for an AI call and for a human-agent call, on the dialer yo
 An audit-ready, tamper-evident, independently verifiable record of every in-scope call, produced automatically and sitting on top of the dialer you already run. When an auditor, a carrier, or a client asks "what happened on this call," you hand them a record that proves its own integrity.
 
 <Warning>
-  This is evidence and provenance, not a legal judgment. A signed, witnessed record proves what the record contains and that it was not altered after signing. It does not by itself prove that a call legally occurred, and it does not make you compliant. You remain responsible for your scripts, your consent practices, your retention policy, and review by your own counsel. See [the evidence boundary](/compliance-records/evidence-boundary).
+  This is evidence and provenance, not a legal judgment. A signed, timestamped record proves what the record contains and that it was not altered after signing. It does not by itself prove that a call legally occurred, and it does not make you compliant. You remain responsible for your scripts, your consent practices, your retention policy, and review by your own counsel. See [the evidence boundary](/compliance-records/evidence-boundary).
 </Warning>
 
 ## See the whole record
@@ -58,7 +58,7 @@ Every claim above maps to a part of the record you can inspect and verify yourse
   <Card title="Verify a vCon" icon="circle-check" href="/compliance-records/verify-a-vcon">
     Check any record yourself in the public verifier.
   </Card>
-  <Card title="Third-party witnessing" icon="user-shield" href="/compliance-records/third-party-witnessing">
-    What the independent witness sees, and what it never sees.
+  <Card title="Verify the timestamp" icon="clock" href="/compliance-records/verify-the-timestamp">
+    Confirm the DigiCert trusted timestamp yourself.
   </Card>
 </CardGroup>

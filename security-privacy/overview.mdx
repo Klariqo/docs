@@ -1,6 +1,6 @@
 ---
 title: "Security overview"
-description: "How Klariqo protects compliance records with signing, encryption, and witnessing, and what remains your responsibility around the dialer you already run."
+description: "How Klariqo protects compliance records with signing, encryption, and trusted timestamps, and what remains your responsibility around the dialer you already run."
 ---
 
 Security is shared. Klariqo protects the compliance record system and the evidence chain. You control the dialer environment, call scripts, access decisions, consent practices, and retention policy around your own operations.
@@ -25,8 +25,8 @@ This page explains that split.
   <Step title="Stores recordings encrypted">
     Recordings are kept in encrypted storage.
   </Step>
-  <Step title="Uses third-party witnessing">
-    An independent witness records the record's fingerprint plus minimal audit identifiers. The witness does not receive the transcript, audio, phone numbers, or QA content.
+  <Step title="Applies a trusted timestamp">
+    Klariqo obtains an RFC 3161 trusted timestamp from DigiCert over the record's fingerprint, proving the record existed at a point in time. DigiCert does not receive the transcript, audio, phone numbers, or QA content.
   </Step>
 </Steps>
 
@@ -46,7 +46,7 @@ You are responsible for the systems and decisions you control.
 
 <CardGroup cols={2}>
   <Card title="Klariqo evidence layer" icon="shield-check" href="/compliance-records/evidence-chain">
-    Signed records, content hashes, QA results, witnessing, and verification.
+    Signed records, content hashes, QA results, trusted timestamps, and verification.
   </Card>
   <Card title="Your operating layer" icon="users" href="/compliance-records/evidence-boundary">
     Scripts, consent, dialer administration, access control, retention, and legal review.

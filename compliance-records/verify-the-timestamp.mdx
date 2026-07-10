@@ -1,0 +1,70 @@
+---
+title: "Verify a record's trusted timestamp"
+description: "Confirm a Klariqo compliance record existed at a point in time, checked against DigiCert, a global trust authority Klariqo does not control. No account, no login."
+---
+
+The [signature check](/compliance-records/verify-a-vcon) proves a record was not altered since Klariqo signed it. The trusted timestamp adds an independent, outside proof of time: it shows this exact record already existed at a specific moment, attested by DigiCert, a global certificate authority that Klariqo does not run. That makes later backdating or silent replacement detectable.
+
+The timestamp uses RFC 3161, the same standard behind the timestamps on digitally signed PDFs and e-signatures. When a record is signed, Klariqo sends a SHA-256 fingerprint of it to DigiCert's timestamp authority, which returns a signed token that says "this exact fingerprint existed at this time." No transcript, phone number, name, or recording is sent to DigiCert, only the fingerprint.
+
+## What you need
+
+Every signed record can be downloaded as an evidence bundle (a `.zip`) that contains everything needed to check it, with nothing from Klariqo required at verification time:
+
+- `<record>.vcon.json` the signed record itself
+- `<record>.tsr` the DigiCert timestamp token
+- `digicert-root.pem` DigiCert's public root certificate, so the check runs offline
+- `VERIFY-THIS-RECORD.txt` these instructions
+
+The trust comes from DigiCert, whose root is already in every operating system and browser. You can use the copy in the bundle, or your own system's trust store, or confirm the root matches DigiCert's published Trusted Root G4. The result is the same.
+
+## Verify it yourself
+
+You need OpenSSL, which is free and standard. It is already on Mac and Linux. On Windows it is included in Git Bash (part of the free Git for Windows).
+
+<Steps>
+  <Step title="Open a terminal in the bundle folder">
+    Unzip the bundle, then open a terminal in that folder. On Windows, use Git Bash (not PowerShell), where OpenSSL is already available.
+  </Step>
+  <Step title="Run the verification">
+    Run one line (substitute the record's actual filenames):
+    ```bash
+    openssl ts -verify -token_in -data record.vcon.json -in record.tsr -CAfile digicert-root.pem
+    ```
+    A genuine record prints exactly:
+    ```text
+    Verification: OK
+    ```
+    That confirms DigiCert, not Klariqo, attests this exact record existed at the stamped time and has not been altered. Change one byte of the record and the check fails.
+  </Step>
+  <Step title="Read the stamped time">
+    To see the exact moment DigiCert sealed the record:
+    ```bash
+    openssl ts -reply -token_in -in record.tsr -text
+    ```
+    Look for the `Time stamp:` line.
+  </Step>
+</Steps>
+
+## What this proves
+
+| Check | What it tells you |
+| --- | --- |
+| `Verification: OK` | This exact record, unchanged, was timestamped by DigiCert. |
+| The stamped time | The record existed no later than that moment, per DigiCert's clock. |
+| Checked against DigiCert, not Klariqo | The proof does not depend on trusting Klariqo. |
+
+Because a record is timestamped within moments of the call, a matching timestamp shows the record existed right after the call and has not changed since, so it could not have been created or edited later.
+
+<Warning>
+  A trusted timestamp proves integrity and timing: that this exact record existed at that moment and was not altered. It does not prove a conversation took place, does not prove consent, and does not make a call lawful or make you compliant. The record itself (recording and transcript) is the evidence of content, and final legal admissibility is your counsel's determination. See [the evidence boundary](/compliance-records/evidence-boundary).
+</Warning>
+
+<CardGroup cols={2}>
+  <Card title="Verify a vCon" icon="signature" href="/compliance-records/verify-a-vcon">
+    Check the signature and tamper-evidence of a record.
+  </Card>
+  <Card title="The evidence chain" icon="link" href="/compliance-records/evidence-chain">
+    See how a call becomes a signed, timestamped record end to end.
+  </Card>
+</CardGroup>

@@ -16,7 +16,7 @@
 
 - "Compliance record" or "evidence record" for the signed call record. It is a vCon underneath; say vCon when referring to the standard.
 - "The dialer you already run" for the customer's existing call system. Klariqo sits on top of it, it does not replace it.
-- "Verifier" is the public tool that checks a record. "Witness" is the independent third party. Do not say the witness sees the call content.
+- "Verifier" is the public tool that checks a record. "Trusted timestamp" is the RFC 3161 timestamp from DigiCert (an independent authority) that seals when a record existed. DigiCert receives only the fingerprint, never the call content.
 - "Scorecard" is the customer-configured QA ruleset. "Evidence chain" is the end-to-end flagship story.
 
 ## Style preferences
