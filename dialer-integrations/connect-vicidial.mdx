@@ -33,7 +33,7 @@ Klariqo reads your call recordings through VICIdial's built-in non-agent API. To
     Klariqo uses read functions only, and no write access is needed:
 
     - `agent_stats_export` and `recording_lookup` to find and fetch recordings.
-    - `lead_field_info` to read the caller's number and name. This needs the user's "GET LEAD INFO" permission.
+    - `lead_field_info` and `lead_all_info` to read caller and lead fields. These need the user's "GET LEAD INFO" permission.
     - `phone_number_log` to confirm whether each call was inbound or outbound.
   </Step>
   <Step title="Reachability">
@@ -70,6 +70,9 @@ Direction is resolved per call, never assumed, because it affects consent obliga
   </Card>
   <Card title="Compliance records" icon="shield-check" href="/compliance-records/overview">
     How each reviewed call becomes a signed, timestamped record.
+  </Card>
+  <Card title="Add your dialer's fields" icon="table-columns" href="/dialer-integrations/field-enrichment">
+    Bind the lead fields you choose, such as a consent reference or disposition, into each signed record.
   </Card>
 </CardGroup>
 

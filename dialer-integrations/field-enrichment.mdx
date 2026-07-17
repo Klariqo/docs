@@ -1,0 +1,86 @@
+---
+title: "Add VICIdial fields to your records"
+description: "Choose which of your VICIdial lead fields bind into each signed compliance record, such as a consent reference, disposition, or lead source, with honest provenance on every field."
+---
+
+Your dialer already stores things a buyer or auditor asks about later: a consent reference, the disposition, the lead source, your own custom columns. Klariqo can bind the fields **you choose** into each signed compliance record, so the evidence travels with the call instead of living in a separate system.
+
+You pick the fields once. Every reviewed call after that carries them, inside the signature.
+
+## What you need first
+
+<Steps>
+  <Step title="A compliance and QA connection">
+    Set up [Connect VICIdial](/dialer-integrations/connect-vicidial) first. Field enrichment builds on that same read-only connection, so there is nothing new to install.
+  </Step>
+  <Step title="GET LEAD INFO on your API user">
+    Klariqo reads your lead row through VICIdial's lead information API. Your API user needs the "GET LEAD INFO" permission. This is a checkbox in your VICIdial admin, not a code change.
+  </Step>
+  <Step title="Recent call activity">
+    Field discovery needs recent call activity for the agents or campaign you want Klariqo to review. If the connector is brand new or idle, place or import a test call first, then run **Test connection** again.
+  </Step>
+</Steps>
+
+<Note>
+  Field enrichment needs VICIdial's lead information API to return the full lead row for a recent reviewed call. After you connect VICIdial, click **Test connection** in Klariqo. If Klariqo can read the lead row, the field picker shows the available lead fields. If your VICIdial build or API user cannot provide that read, the picker cannot auto-populate fields for that connector.
+</Note>
+
+## Choose your fields
+
+<Steps>
+  <Step title="Run Test connection">
+    Klariqo reads your dialer's lead fields and lists the ones it found. These are your real columns, not a generic template.
+  </Step>
+  <Step title="Pick the fields you want in the record">
+    Turn on any field a buyer or auditor might ask you for later. Name it whatever you call it internally.
+  </Step>
+  <Step title="Decide how each value is stored">
+    For each field, store the **actual value**, or store only a **fingerprint** of it. A fingerprint proves the value existed and was not altered, without putting the value itself in the record. Store the value when someone needs to open or read it. Use a fingerprint when the value is sensitive and you only need to prove it was there, unchanged.
+  </Step>
+  <Step title="Save">
+    Every reviewed call from then on carries your chosen fields inside the signed record.
+  </Step>
+</Steps>
+
+## Consent references
+
+You can map a dialer field that contains a consent reference, such as a TrustedForm certificate URL or a Jornaya LeadiD. Klariqo records the value from your dialer and labels where it came from. Klariqo may flag when the value does not match the expected format, but Klariqo does not verify consent, confirm that the certificate or ID is valid, or decide whether the call was legally authorized.
+
+If you want a buyer to be able to open the reference themselves, store the value rather than a fingerprint. A fingerprint proves the reference was present and unchanged, but it cannot be opened.
+
+## What the record says about each field
+
+This is the part that makes the record worth something to the person receiving it. For every field you bind, the record states:
+
+- **Where the value came from**: which dialer field it was read from, and when.
+- **That Klariqo captured it, and did not verify it.** The value is your dialer's. Klariqo does not check whether it is true.
+- **That the category is your label.** If you tag a field as a consent reference, the record records that as your classification, not as something Klariqo assigned or confirmed.
+- **The exact field plan** that produced the record, as a fingerprint, so a recipient can confirm which configuration was in force for that call.
+
+A field you selected that had no value on the call is recorded as not found, rather than quietly left out. Nothing you asked for goes missing without saying so.
+
+<Note>
+  Klariqo refuses to store values that look like sensitive personal data, such as a national ID or card number, even if you map that field. The record shows the field was refused by policy rather than storing it.
+</Note>
+
+## If the picker shows no fields
+
+- **Run Test connection first.** The picker fills in from that check.
+- **Check recent activity.** If the agents or campaign you selected have no recent reviewed calls, there is nothing for Klariqo to read yet. Place or import a call, then test again.
+- **Check the API user.** Without "GET LEAD INFO", Klariqo cannot read your lead row.
+- **Lists with no custom fields** show your standard lead columns only. The record records that it was a standard-column read, so you can tell the difference.
+
+## What you get
+
+<CardGroup cols={2}>
+  <Card title="Compliance records" icon="shield-check" href="/compliance-records/overview">
+    How each reviewed call becomes a signed, timestamped record.
+  </Card>
+  <Card title="What is in a record" icon="list-check" href="/security-privacy/data-in-a-compliance-record">
+    Exactly what a compliance record carries, and what it does not.
+  </Card>
+</CardGroup>
+
+<Warning>
+  Klariqo captures the fields you select from your dialer and signs them into the record. It does not verify that the values are true, assign the categories you choose, prove consent, or determine legal sufficiency. Records support evidence, provenance, and audit-readiness. They do not make you compliant and do not replace review by your counsel.
+</Warning>
