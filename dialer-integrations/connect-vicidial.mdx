@@ -25,7 +25,9 @@ Klariqo reads your call recordings through VICIdial's built-in non-agent API. To
 
 <Steps>
   <Step title="Your VICIdial URL">
-    The web address of your VICIdial admin and API, for example `https://dialer.yourcompany.com`.
+    The web address of your VICIdial admin and API, for example `https://dialer.yourcompany.com`. An address with no `http://` or `https://` is treated as HTTPS.
+
+    Use HTTPS if you can. If your dialer only has plain HTTP, your account owner has to accept the risk before it can connect: your dialer login and call audio can be read on the network path between your dialer and Klariqo. That acceptance covers that exact address, and changing the address needs a new one. A plain HTTP connection is shown as unencrypted. If you use one, a read-only API user and allowing only the Klariqo IP limit the risk, but they don't remove it.
   </Step>
   <Step title="An API user for recordings">
     A VICIdial user with API access and permission to view reports and lead information. Klariqo uses this account to list recordings, retrieve them, and read each call's caller number and direction for the record.
