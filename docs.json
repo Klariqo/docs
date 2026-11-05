@@ -3,9 +3,18 @@
   "theme": "mint",
   "name": "Klariqo",
   "colors": {
-    "primary": "#a3ff0f",
-    "light": "#a3ff0f",
-    "dark": "#84cc00"
+    "primary": "#B9440C",
+    "light": "#F58A52",
+    "dark": "#0F1724"
+  },
+  "background": {
+    "color": {
+      "light": "#F1F3F5",
+      "dark": "#0F1724"
+    }
+  },
+  "fonts": {
+    "family": "Instrument Sans"
   },
   "favicon": "/favicon.svg",
   "seo": {

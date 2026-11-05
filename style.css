@@ -1,0 +1,19 @@
+/* Klariqo v5 look. Colours and fonts that docs.json can't set by itself. Source: landing/style_guide.md */
+@import url("https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;500&display=swap");
+
+code,
+pre,
+pre code {
+  font-family: "Martian Mono", ui-monospace, Consolas, monospace;
+  font-size: 0.86em;
+}
+
+/* docs.json's button colour is ink, which would vanish on the ink ground in dark mode. */
+.dark #topbar-cta-button > a > span,
+.dark #topbar-cta-button a > span:first-child {
+  background-color: #f1f3f5;
+}
+.dark #topbar-cta-button span,
+.dark #topbar-cta-button svg {
+  color: #0f1724;
+}
