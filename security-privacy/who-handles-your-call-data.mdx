@@ -1,0 +1,33 @@
+---
+title: "Who handles your call data"
+description: "Where your call audio and transcripts go when Klariqo processes a call, which vendors see them, and what Klariqo is and isn't certified for."
+---
+
+To turn a call into a record, Klariqo has to process it. That means your call audio reaches our servers and at least one of our transcription vendors. If your requirements say sensitive data can't leave your systems, you need to know this before connecting.
+
+## Where call data goes
+
+| Who | What they receive | Why |
+| --- | --- | --- |
+| Klariqo | Your call audio, transcripts and call details | To make and store your record |
+| Deepgram | Call audio | Transcription, depending on the call and your plan |
+| Google Gemini | Call audio, transcripts, or both, depending on the call and your plan | Transcription, scoring and sentiment |
+| DigiCert | A fingerprint only, never call content | The trusted timestamp |
+| JLINC | A fingerprint only, never call content | An independent witness to the record, where this is switched on |
+
+The full list of sub-processors is in the [privacy policy](https://klariqo.com/privacy-policy/).
+
+## What Klariqo isn't
+
+- **Klariqo is not HIPAA or PCI compliant.** Don't use it for calls that require either.
+- **Klariqo doesn't offer PII redaction.** Card numbers, health details and anything else said on a call appear in the audio and transcript. Klariqo's vendors process that audio.
+
+If your calls carry that kind of data, Klariqo isn't the right fit today.
+
+## Your connection to Klariqo
+
+Klariqo connects to your dialer over HTTPS by default. If you accept a plain HTTP connection, your dialer login and call audio can be read on the network path. See [Connect VICIdial](/dialer-integrations/connect-vicidial).
+
+<Warning>
+  You remain the controller of your call data. You're responsible for telling callers they're being recorded, and for your own consent, retention and counsel review.
+</Warning>

@@ -11,7 +11,7 @@ This page explains that split.
 
 <Steps>
   <Step title="Signs compliance records">
-    Klariqo signs records for calls covered by an active scorecard. The record is signed with a JWS signature using RS256, and the signature carries Klariqo's signing certificate.
+    Klariqo signs a record for each recorded call. The record is signed with a JWS signature using RS256, and the signature carries Klariqo's signing certificate.
   </Step>
   <Step title="Makes changes detectable">
     A signed record is tamper-evident. If the signed vCon is changed after signing, verification fails.
@@ -20,7 +20,7 @@ This page explains that split.
     A SHA-512 content hash fingerprints the recording inside the record. This helps tie the record to the recording content.
   </Step>
   <Step title="Secures dialer connections">
-    Klariqo uses SIP digest authentication for dialer connections. Audio travels over an encrypted WebSocket.
+    Recording connections use HTTPS by default. Plain HTTP is refused unless your account owner accepts the risk for that address. Voice AI connections use SIP digest authentication, and audio to Klariqo travels over an encrypted WebSocket.
   </Step>
   <Step title="Stores recordings encrypted">
     Recordings are kept in encrypted storage.
@@ -29,6 +29,10 @@ This page explains that split.
     Klariqo obtains an RFC 3161 trusted timestamp from DigiCert over the record's fingerprint, proving the record existed at a point in time. DigiCert does not receive the transcript, audio, phone numbers, or QA content.
   </Step>
 </Steps>
+
+## Who sees your call data
+
+Your call audio reaches Klariqo and its transcription vendors. Klariqo is not HIPAA or PCI compliant. See [who handles your call data](/security-privacy/who-handles-your-call-data).
 
 ## What you own
 

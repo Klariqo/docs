@@ -1,0 +1,40 @@
+---
+title: "Fix a failed connection test"
+description: "What each Test connection result means for your VICIdial compliance and QA connection, and what to change to fix it, without contacting Klariqo."
+---
+
+**Test connection** checks your dialer the way Klariqo will use it, and tells you which step failed. This is for the compliance and QA connection. For voice AI, see [SIP troubleshooting](/dialer-integrations/troubleshooting).
+
+## Your address and network
+
+| What you see | What to do |
+| --- | --- |
+| The address can't be found | Check the spelling of the address. |
+| The connection was refused | Check the web service is running on that port. If access is restricted, allow `35.232.23.234`. |
+| Nothing answered | A firewall is a common cause, including your cloud provider's. Allow `35.232.23.234`. |
+| It's on an internal address | Klariqo connects over the internet, so the dialer needs a public address. |
+| The server answered, but not as VICIdial | Check the address, and that VICIdial is running on it. |
+
+## HTTPS and HTTP
+
+| What you see | What to do |
+| --- | --- |
+| The certificate didn't check out | Ask your administrator to check its expiry, hostname and full certificate chain. |
+| It redirects to http, or to another server | Fix the redirect on your dialer's web server, or enter the address it actually uses. |
+| Recording links use http on another server | Your connection is HTTPS, so your recording server needs HTTPS too. |
+| The connection uses http and isn't accepted | Your account owner accepts the risk in **Settings**, under **Connections**, or you switch to HTTPS. See [Connect VICIdial](/dialer-integrations/connect-vicidial). |
+
+## Your API user
+
+| What you see | What to do |
+| --- | --- |
+| The user or password was rejected | Check them in your VICIdial admin. |
+| The user can't read what's needed | In your VICIdial admin, give the user "GET LEAD INFO" and permission to view reports. |
+
+## Nothing to test yet
+
+| What you see | What to do |
+| --- | --- |
+| No recent agents or recordings | The connection may be fine, but there's nothing to read yet. Test again once your agents have taken recorded calls. |
+
+If a call has recorded but no record appears, check your balance first. See [your balance and top-ups](/billing/balance-and-top-ups).

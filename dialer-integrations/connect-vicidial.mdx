@@ -36,10 +36,11 @@ Klariqo reads your call recordings through VICIdial's built-in non-agent API. To
 
     - `agent_stats_export` and `recording_lookup` to find and fetch recordings.
     - `lead_field_info` and `lead_all_info` to read caller and lead fields. These need the user's "GET LEAD INFO" permission.
-    - `phone_number_log` to confirm whether each call was inbound or outbound.
+    - `phone_number_log` to read each call's direction and dial status.
+    - `version` to read your dialer's clock, so call times are placed correctly.
   </Step>
   <Step title="Reachability">
-    Klariqo must be able to reach your VICIdial API and download the recording URLs it returns. If your system restricts API or recording access by IP, allow the Klariqo IP we give you during setup.
+    Klariqo must be able to reach your VICIdial API and download the recording URLs it returns. If your system restricts API or recording access by IP, allow `35.232.23.234`.
   </Step>
   <Step title="Recording authorization">
     Confirm that these calls were lawfully recorded and that you are authorized to submit them for review.
@@ -49,20 +50,18 @@ Klariqo reads your call recordings through VICIdial's built-in non-agent API. To
   </Step>
 </Steps>
 
-Before any review starts, use the **Test connection** button in your Klariqo dashboard. It checks that the API authenticates, that both read functions work, and that a recording actually downloads, and it shows exactly which step failed if anything is blocked.
+Before any review starts, use the **Test connection** button in your Klariqo dashboard. It checks that the API authenticates, that the read functions work, and that a recording actually downloads, and it shows exactly which step failed if anything is blocked. See [fix a failed connection test](/dialer-integrations/fix-a-connection-test).
 
 ## What each record captures
 
 Every reviewed call becomes a record that carries the caller's phone number, the agent who handled it, the timestamp, the duration, and the call direction. Klariqo reads these values directly from your dialer's own call logs, and attaches them to the QA score and the signed record.
 
-Direction is resolved per call, never assumed, because it affects consent obligations:
+Direction is recorded honestly, per call, and not assumed:
 
-- **Inbound** calls are positively confirmed from your inbound call log.
-- **Outbound** calls are positively confirmed when your VICIdial has an index on the `phone_number` column of its call-log tables. This is a one-line change your database administrator can make, and it is [recommended by VICIdial's own documentation](https://www.vicidial.org/docs/NON-AGENT_API.txt). Without it, on high-volume systems Klariqo marks an unconfirmed call `unknown` rather than guessing, so the record stays honest.
+- **Inbound** is confirmed when the call appears in your inbound call log.
+- **Otherwise** it comes from the direction set on your connection, and the record says it was inferred. If your connection is mixed, a call that can't be placed stays `unknown`.
 
-<Note>
-  If a line carries only one direction (for example an inbound-only queue), tell us during setup and Klariqo labels it accordingly. If a line carries both, add the index above for full outbound confirmation.
-</Note>
+A record says which of these applied, so nobody reads an inference as a confirmed fact.
 
 ## What you get
 

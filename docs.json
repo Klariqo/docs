@@ -34,6 +34,7 @@
         "group": "Start here",
         "pages": [
           "index",
+          "start-here/get-started",
           "start-here/how-klariqo-works",
           "start-here/trust-and-honesty",
           "start-here/glossary"
@@ -48,13 +49,15 @@
           "compliance-records/signed-vcons",
           "compliance-records/verify-a-vcon",
           "compliance-records/verify-the-timestamp",
-          "compliance-records/evidence-boundary"
+          "compliance-records/evidence-boundary",
+          "compliance-records/find-calls-from-a-list"
         ]
       },
       {
         "group": "Call QA",
         "pages": [
           "call-qa/overview",
+          "call-qa/turn-on-qa",
           "call-qa/scorecards",
           "call-qa/qa-results",
           "call-qa/ai-call-qa",
@@ -66,10 +69,17 @@
         "pages": [
           "dialer-integrations/overview",
           "dialer-integrations/connect-vicidial",
+          "dialer-integrations/fix-a-connection-test",
           "dialer-integrations/field-enrichment",
           "dialer-integrations/connect-vicidial-voice",
-          "dialer-integrations/troubleshooting",
-          "dialer-integrations/twilio"
+          "dialer-integrations/troubleshooting"
+        ]
+      },
+      {
+        "group": "Billing",
+        "pages": [
+          "billing/how-charging-works",
+          "billing/balance-and-top-ups"
         ]
       },
       {
@@ -86,6 +96,7 @@
         "group": "Security and privacy",
         "pages": [
           "security-privacy/overview",
+          "security-privacy/who-handles-your-call-data",
           "security-privacy/data-in-a-compliance-record",
           "security-privacy/public-verifier-privacy"
         ]

@@ -22,8 +22,8 @@ It runs the same way for an AI call and for a human-agent call, on the dialer yo
   <Step title="The record is signed">
     The vCon is signed with a JWS signature (RS256), carrying Klariqo's signing certificate. The signature is tamper-evident: any later edit to the record breaks it. See [signed vCons](/compliance-records/signed-vcons).
   </Step>
-  <Step title="QA and sentiment are attached">
-    The call's quality and compliance review (pass, needs review, or fail) and its sentiment are attached as signed analysis blocks inside the record. See [call QA](/call-qa/overview).
+  <Step title="QA and sentiment are attached, if QA is on">
+    With [QA on](/call-qa/turn-on-qa), the call's quality and compliance review (pass, needs review, or fail) and its sentiment are attached as signed analysis blocks inside the record. See [call QA](/call-qa/overview).
   </Step>
   <Step title="The record is timestamped">
     A trusted timestamp (RFC 3161) is obtained from DigiCert, a global certificate authority Klariqo does not control. It stamps the record's fingerprint with the time, so anyone can later confirm this exact record existed at that moment and was not backdated. DigiCert receives only the fingerprint, never the transcript, audio, phone numbers, or QA content. See [verify the timestamp](/compliance-records/verify-the-timestamp).
@@ -38,7 +38,7 @@ It runs the same way for an AI call and for a human-agent call, on the dialer yo
 
 ## What this gives you
 
-An audit-ready, tamper-evident, independently verifiable record of every in-scope call, produced automatically and sitting on top of the dialer you already run. When an auditor, a carrier, or a client asks "what happened on this call," you hand them a record that proves its own integrity.
+An audit-ready, tamper-evident, independently verifiable record of every recorded call, produced automatically and sitting on top of the dialer you already run. When an auditor, a carrier, or a client asks "what happened on this call," you hand them a record that proves its own integrity.
 
 <Warning>
   This is evidence and provenance, not a legal judgment. A signed, timestamped record proves what the record contains and that it was not altered after signing. It does not by itself prove that a call legally occurred, and it does not make you compliant. You remain responsible for your scripts, your consent practices, your retention policy, and review by your own counsel. See [the evidence boundary](/compliance-records/evidence-boundary).

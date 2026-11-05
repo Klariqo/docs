@@ -3,7 +3,7 @@ title: "Data in a compliance record"
 description: "What data a Klariqo compliance record may contain (parties, transcript, recording hash, QA), and what the trusted timestamp authority never sees or receives."
 ---
 
-A Klariqo compliance record is a signed vCon issued for a call covered by an active scorecard. It brings the call record, analysis, fingerprint, and signature into one verifiable container.
+A Klariqo compliance record is a signed vCon issued for a call. It brings the call record, fingerprint, signature, and any analysis into one verifiable container.
 
 This page describes the data shape at a high level. Examples are synthetic only.
 
@@ -23,10 +23,10 @@ This page describes the data shape at a high level. Examples are synthetic only.
     A SHA-512 content hash that fingerprints the recording.
   </Step>
   <Step title="QA result">
-    The quality and compliance review attached to the record. QA results can include statuses such as pass, needs_review, fail, not_applicable, or error.
+    With QA on, the quality and compliance review attached to the record. QA results can include statuses such as pass, needs_review, fail, not_applicable, or error.
   </Step>
   <Step title="Sentiment">
-    Sentiment analysis attached as part of the record analysis.
+    With QA on, sentiment analysis attached as part of the record analysis.
   </Step>
   <Step title="Signature">
     A JWS signature using RS256, carrying Klariqo's signing certificate, so later changes are detectable.
@@ -69,7 +69,7 @@ This example is synthetic. It is not a real call, transcript, customer record, o
 
 The trusted timestamp authority (DigiCert) receives only the record's SHA-256 fingerprint. It does not receive the transcript, audio, phone numbers, or QA content.
 
-That distinction matters. The timestamp helps show that a specific signed record existed at a point in time, without sending the call content to any outside party.
+That distinction matters. The timestamp helps show that a specific signed record existed at a point in time, without sending call content to the timestamp authority. Your call audio does reach Klariqo's transcription vendors. See [who handles your call data](/security-privacy/who-handles-your-call-data).
 
 <CardGroup cols={2}>
   <Card title="Verify the timestamp" icon="clock" href="/compliance-records/verify-the-timestamp">

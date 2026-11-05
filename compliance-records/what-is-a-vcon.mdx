@@ -5,7 +5,7 @@ description: "How the IETF vCon conversation-record format turns a phone call in
 
 A vCon is a structured conversation record. It gives a call a standard shape: who participated, what happened in the dialog, and what analysis was attached afterward.
 
-Klariqo uses vCons as the container for compliance records. We issue signed vCons for calls covered by an active scorecard. We do not own the vCon standard.
+Klariqo uses vCons as the container for compliance records. We issue a signed vCon for each recorded call. We do not own the vCon standard.
 
 ## Current IETF status
 
@@ -25,7 +25,7 @@ The vCon effort is associated with the IETF vCon working group, Jeff Pulver, and
     The conversation itself. In a Klariqo compliance record, the dialog includes the transcript, a reference to the recording, and a SHA-512 content hash that fingerprints the recording.
   </Step>
   <Step title="Analysis">
-    Structured review data attached to the conversation. Klariqo records can include transcript analysis, quality and compliance results, sentiment, and telemetry.
+    Structured review data attached to the conversation. Klariqo records can include transcript analysis and telemetry, and with QA on, quality and compliance results and sentiment.
   </Step>
   <Step title="Signature">
     Klariqo signs the vCon with a JWS signature (RS256) that carries Klariqo's signing certificate. This makes later edits detectable.
@@ -49,6 +49,6 @@ That distinction matters. vCon is the conversation-record format. Klariqo's comp
 
 ## Why this matters
 
-A vCon gives the call one portable record instead of scattered artifacts. The transcript, recording reference, recording fingerprint, QA result, sentiment, and signature travel together.
+A vCon gives the call one portable record instead of scattered artifacts. The transcript, recording reference, recording fingerprint, signature, and any QA result and sentiment travel together.
 
 That gives you evidence and provenance in one place. It does not make you compliant by itself. You remain responsible for your scripts, consent practices, retention policy, and counsel review.

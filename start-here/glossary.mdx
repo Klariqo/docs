@@ -9,7 +9,7 @@ A vCon is an IETF-track conversation-record format for parties, dialog, and anal
 
 ## Compliance record / evidence record
 
-A compliance record, also called an evidence record, is a signed vCon Klariqo issues for a call covered by an active scorecard. It carries the call record, analysis, and signature together.
+A compliance record, also called an evidence record or a KCR (Klariqo Call Record), is the signed vCon Klariqo issues for a call. It carries the call record and signature together, plus a QA result and sentiment if QA is on.
 
 ## Content hash
 
@@ -25,7 +25,7 @@ Self-asserted means Klariqo publishes its own signing key. Klariqo is not a cert
 
 ## Public verifier
 
-The public verifier is the in-browser tool at `klariqo.com/vcon` that checks a vCon. It reports whether the signature is valid, whether the record was altered, and whether it was signed by Klariqo's published key.
+The public verifier is the in-browser tool at [verify.klariqo.com](https://verify.klariqo.com/?tab=vcon) that checks a vCon. It reports whether the signature is valid, whether the record was altered, and whether it was signed by Klariqo's published key.
 
 ## Trusted timestamp
 
@@ -45,7 +45,7 @@ Standard Webhooks is the signing scheme Klariqo uses for compliance export deliv
 
 ## VICIdial
 
-VICIdial is the existing dialer Klariqo can connect to as a remote SIP agent. Klariqo sits on top of the dialer you already run; it does not replace it.
+VICIdial is the dialer Klariqo connects to. Klariqo sits on top of the dialer you already run; it does not replace it.
 
 ## Honesty boundary
 

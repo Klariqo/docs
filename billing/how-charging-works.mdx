@@ -1,0 +1,50 @@
+---
+title: "How charging works"
+description: "How Klariqo charges for recorded calls: per call, what counts as a call, what is free, and how long calls are priced. Current prices are on the pricing page."
+---
+
+Recorded calls are charged per call, from a prepaid balance. Current prices are on [the pricing page](https://klariqo.com/pricing/). This page explains the rules.
+
+## What you pay for
+
+| Your account | What each call gets | How it's charged |
+| --- | --- | --- |
+| **Records** (the default) | A signed, timestamped record with a transcript | Your first 10,000 calls are free, once. After that, the record price per call. |
+| **QA** | The record, plus a score against your scorecard, and sentiment | The QA price per scored call, with the record included. The free 10,000 doesn't cover scored calls. A call that couldn't be scored is treated as a record. |
+
+## What counts as a call
+
+- **Only conversations are charged.** A call counts when your dialer's status for it shows a conversation.
+- **Legs of one call are one call.** A transfer is grouped with the call it came from, when Klariqo can tell they belong together.
+- **Anything unclear isn't charged.** If Klariqo can't tell what happened on a call, the record is still made and the charge is $0.
+- **A dial status Klariqo doesn't recognize isn't charged.** See below.
+
+## Short and long calls
+
+| Call length | Charge |
+| --- | --- |
+| Under 10 seconds | Free, and it doesn't use up your free calls |
+| 10 to 30 seconds | Half price |
+| 31 seconds to 5 minutes | The price per call |
+| Over 5 minutes | The price per call, plus a per-minute rate in 30-second blocks |
+
+## On QA, you only pay for a score
+
+A call is charged at the QA price only if it has a real score and arrived after you turned QA on. A call that couldn't be scored, such as a voicemail or a call with no engagement, is treated as a record instead.
+
+## Dial statuses Klariqo doesn't recognize
+
+VICIdial lets you create your own dial statuses. A status is a label your agent chooses, so Klariqo doesn't assume what a new one means. Those calls are recorded and signed, and they aren't charged. They're listed on your **Billing** page so you can see them.
+
+## When charges appear
+
+A call is settled about an hour after it finishes, so all of its legs can arrive first. Your balance changes then, not at the moment of the call.
+
+<CardGroup cols={2}>
+  <Card title="Your balance and top-ups" icon="wallet" href="/billing/balance-and-top-ups">
+    Adding funds, automatic top-ups, and what happens at zero.
+  </Card>
+  <Card title="Turn on QA" icon="list-check" href="/call-qa/turn-on-qa">
+    Move your account from records to scored calls.
+  </Card>
+</CardGroup>

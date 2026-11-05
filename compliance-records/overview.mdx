@@ -3,7 +3,7 @@ title: "Compliance records"
 description: "What a Klariqo compliance record is, what it contains, and why the signed, timestamped, independently verifiable record is trustworthy without trusting us."
 ---
 
-Every in-scope call on Klariqo produces a compliance record: a signed, independently verifiable account of the call that sits on top of the dialer you already run. This section explains what is in that record and why you can trust it.
+Every recorded call on Klariqo produces a compliance record: a signed, independently verifiable account of the call that sits on top of the dialer you already run. This section explains what is in that record and why you can trust it.
 
 If you read one page, read [the evidence chain](/compliance-records/evidence-chain). It walks a call from audio to verified record in one place.
 
@@ -14,7 +14,7 @@ If you read one page, read [the evidence chain](/compliance-records/evidence-cha
     Who was on the call and the conversation itself: the transcript, a reference to the recording, and the SHA-512 content hash that fingerprints that recording.
   </Step>
   <Step title="The analysis">
-    Signed analysis attached to the record: the quality and compliance review of the call, and its sentiment.
+    With [QA on](/call-qa/turn-on-qa), signed analysis is attached to the record: the quality and compliance review of the call, and its sentiment.
   </Step>
   <Step title="The signature">
     A JWS signature over the whole record, carrying Klariqo's signing certificate, so any later change is detectable.

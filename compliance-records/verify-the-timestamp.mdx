@@ -9,14 +9,14 @@ The timestamp uses RFC 3161, the same standard behind the timestamps on digitall
 
 ## What you need
 
-Every signed record can be downloaded as an evidence bundle (a `.zip`) that contains everything needed to check it, with nothing from Klariqo required at verification time:
+A timestamped record can be downloaded as an evidence bundle (a `.zip`) that contains everything needed to check it, with nothing from Klariqo required at verification time. Timestamping runs just after signing, so a record may not have one yet, and if it never gets one the record is still signed and verifiable by its signature. The bundle contains:
 
 - `<record>.vcon.json` the signed record itself
 - `<record>.tsr` the DigiCert timestamp token
 - `digicert-root.pem` DigiCert's public root certificate, so the check runs offline
 - `VERIFY-THIS-RECORD.txt` these instructions
 
-The trust comes from DigiCert, whose root is already in every operating system and browser. You can use the copy in the bundle, or your own system's trust store, or confirm the root matches DigiCert's published Trusted Root G4. The result is the same.
+The trust comes from DigiCert. You can use the copy of its root in the bundle, or confirm it matches DigiCert's published Trusted Root G4.
 
 ## Verify it yourself
 
@@ -54,7 +54,7 @@ You need OpenSSL, which is free and standard. It is already on Mac and Linux. On
 | The stamped time | The record existed no later than that moment, per DigiCert's clock. |
 | Checked against DigiCert, not Klariqo | The proof does not depend on trusting Klariqo. |
 
-Because a record is timestamped within moments of the call, a matching timestamp shows the record existed right after the call and has not changed since, so it could not have been created or edited later.
+A record is timestamped once it is signed, which follows the recording reaching Klariqo. A matching timestamp shows the record existed by that time and has not changed since, so it could not have been created or edited later. The time is when the record was sealed, which can be later than the call.
 
 <Warning>
   A trusted timestamp proves integrity and timing: that this exact record existed at that moment and was not altered. It does not prove a conversation took place, does not prove consent, and does not make a call lawful or make you compliant. The record itself (recording and transcript) is the evidence of content, and final legal admissibility is your counsel's determination. See [the evidence boundary](/compliance-records/evidence-boundary).

@@ -18,8 +18,9 @@ flowchart LR
 ## What happens on a call
 
 - For a Klariqo AI call, the voice agent handles the conversation and can transfer a qualified lead to your human closer.
-- For any in-scope call, AI or human-agent, Klariqo reviews it against your scorecard and produces a compliance record, which is a signed vCon.
-- The record carries the transcript, a recording reference, the QA result, and sentiment, all signed so that tampering is detectable.
+- For every recorded call, AI or human-agent, Klariqo produces a compliance record, which is a signed vCon.
+- The record carries the transcript and a recording reference, signed so that tampering is detectable.
+- If you [turn on QA](/call-qa/turn-on-qa), each call is also reviewed against your scorecard, and the result and sentiment join the record.
 - You can verify any record yourself, and you can have records pushed into your own systems by webhook.
 
 ## Where to go next
