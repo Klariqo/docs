@@ -37,4 +37,17 @@ description: "What each Test connection result means for your VICIdial complianc
 | --- | --- |
 | No recent agents or recordings | The connection may be fine, but there's nothing to read yet. Test again once your agents have taken recorded calls. |
 
+## If a connection keeps failing
+
+Klariqo retries a failing connection less often over time, so it isn't sending your dialer login again and again. It stops retrying in two cases:
+
+- **Only you can fix it,** such as a rejected login, after a day of failing.
+- **It has never worked,** after a week of failing.
+
+A connection that has worked before keeps trying once a day for other kinds of failure, such as an outage.
+
+To start again, fix the cause and run **Test connection**. A passing test restarts it at once. Saving a changed address or login does too.
+
+Klariqo can only pick up calls your dialer can still return when it reconnects, so recordings from a long outage may be missing. Check those calls in your dialer.
+
 If a call has recorded but no record appears, check your balance first. See [your balance and top-ups](/billing/balance-and-top-ups).
